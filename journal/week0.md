@@ -55,3 +55,4 @@ gp env AWS_DEFAULT_REGION=""
 Confirmed in Gitpod [User Settings > Variables](https://gitpod.io/user/variables) that variables are saved:
 ![image](../_docs/assets/week0/GitpodVariables.png)
 
+Started up a new Gitpod environment to confirm AWS CLI was installed correctly and AWS credentials were pulled from Gitpod variables to environment variables.  Successfully ran ```aws sts get-caller-identity``` and returned values.
