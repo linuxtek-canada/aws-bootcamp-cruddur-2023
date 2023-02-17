@@ -25,12 +25,15 @@
   ![image](../_docs/assets/week0/SecurityRecommendations.png)
 
 4.  Created Conceptual Diagram in Lucid Charts AND on a Napkin (for fun)
-![image](../_docs/assets/week0/InvestorNapkinConcept.png)
-![image](../_docs/assets/week0/CruddurConceptualDiagram.png)
-
+  
   * So I found this [napkin diagram](../_docs/assets/week0/InvestorNapkinConcept.png) in a bar downtown.  It might have been left by one of the company executives... I think he doodled a bit on it after his meeting.
+
+![image](../_docs/assets/week0/InvestorNapkinConcept.png)
+
   * [Cruddur Conceptual Diagram Image](../_docs/assets/week0/CruddurConceptualDiagram.png).
   * [Link to Lucid.app Diagram Page](https://lucid.app/lucidchart/7b1529ce-a0a8-4286-9c06-b24db24e74b2/edit?viewport_loc=-709%2C-185%2C3072%2C1563%2C0_0&invitationId=inv_00523f1f-f0cb-42a0-9222-c5c55ec7500b).
+
+![image](../_docs/assets/week0/CruddurConceptualDiagram.png)
 
 5.  Finished architectural diagram:
 ![image](../_docs/assets/week0/CruddurLogicalDiagram.png)
