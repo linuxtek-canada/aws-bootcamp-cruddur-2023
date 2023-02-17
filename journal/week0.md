@@ -79,6 +79,7 @@ Started up a new Gitpod environment to confirm AWS CLI was installed correctly a
 10.  Created a Billing Alarm (after Budget)
 
 * [Used this document](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) to set up a billing alarm using CloudWatch.
+* Also [read this blog](https://aws.amazon.com/blogs/mt/setting-up-an-amazon-cloudwatch-billing-alarm-to-proactively-monitor-estimated-charges/) to better understand how the services communicate with each other to send alerts.
 
 * Configured JSON file [here](../aws/json/aws-metric-alarm-config.json) with settings to breach alarm at $10 usage on one data point, and ran the following command in AWS CLI to set it up:
 
@@ -128,9 +129,10 @@ This started to alarm almost right away, initially because of insufficient data,
 
 ## Stretch Efforts
 
-* Added additional features to architectural diagram (explained above).Adding additional infrastructure on the Free Tier is within my skillset, and I'll try to add these features as we go along if possible.
-* Napkin diagram 😂
-* Helping others in Discord
+* Added additional features to architectural diagram (explained above). Adding additional infrastructure on the Free Tier is within my skillset, and I'll try to add these features as we go along if possible.
+* Napkin diagram 😂.
+* Helping others in Discord.
+* [Article](https://www.linuxtek.ca/2023/02/07/aws-cloud-project-boot-camp-week-0-tips-and-tricks/) with Week 0 Tips and Tricks, including how to set up the Github repo via template, and setting up an AWS organization.
 * [Article](https://www.linuxtek.ca/2023/02/12/aws-cloud-project-bootcamp-week-0-unofficial-homework-guide/) to organize homework into unofficial guide.
 * Forum post to help others (with motivational cat picture):
 ![image](../_docs/assets/week0/GitpodForumPost.png)
