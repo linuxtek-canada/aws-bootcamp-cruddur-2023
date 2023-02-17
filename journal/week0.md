@@ -14,7 +14,6 @@
 1. Attended Week 0 Live Stream, and the Discord Q&A Session afterwards.
   * Watched follow-up Week 0 -  Generate Credentials, AWS CLI, Budget and Billing Alarm via CLI video.
 
-
 2. Watched Chirag's Week 0 - Spend Considerations Video.
 
 3. Watched Ashish's Week 0 - Security Considerations Video.
@@ -76,6 +75,16 @@ Confirmed in Gitpod [User Settings > Variables](https://gitpod.io/user/variables
 ![image](../_docs/assets/week0/GitpodVariables.png)
 
 Started up a new Gitpod environment to confirm AWS CLI was installed correctly and AWS credentials were pulled from Gitpod variables to environment variables.  Successfully ran ```aws sts get-caller-identity``` and returned values.
+
+10.  Created a Billing Alarm (after Budget)
+
+[Used this document](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) to set up a billing alarm using CloudWatch.
+
+11.  Created a Budget
+
+  * Used the JSON from [this article](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/budgets/create-budget.html) to create a billing budget.  Stored a modified copy of it here.
+
+
 
 ## Stretch Efforts
 
