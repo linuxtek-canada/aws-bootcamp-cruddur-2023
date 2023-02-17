@@ -78,13 +78,49 @@ Started up a new Gitpod environment to confirm AWS CLI was installed correctly a
 
 10.  Created a Billing Alarm (after Budget)
 
-[Used this document](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) to set up a billing alarm using CloudWatch.
+* [Used this document](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) to set up a billing alarm using CloudWatch.
+
+* Configured JSON file [here](../aws/json/aws-metric-alarm-config.json) with settings to breach alarm at $10 usage on one data point, and ran the following command in AWS CLI to set it up:
+
+```
+aws cloudwatch put-metric-alarm --cli-input-json file://aws-metric-alarm-config.json
+```
+
+This started to alarm almost right away, initially because of insufficient data, so I will wait to see if it addresses itself once data starts being tracked properly.
 
 11.  Created a Budget
 
   * Used the JSON from [this article](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/budgets/create-budget.html) to create a billing budget.  Stored a modified copy of it here.
 
+  * I'm fortunate to have a lot of AWS credits from various sources including the AWS Community Builders Program, so I set the budget to $100 as I have plenty of credits to burn:
 
+  ![image](../_docs/assets/week0/AWSCredits.png)
+
+  I configured the JSON files in the aws/json directory and ran the following command to create the budget:
+
+  ```
+  aws budgets create-budget \
+    --account-id $AWS_ACCOUNT_ID \
+    --budget file://aws-budget.json \
+    --notifications-with-subscribers file://aws-budget-notifications-with-subscribers.json
+  ```
+
+  * Note that I have the AWS Account ID set as an environment variable in Gitpod so it can automatically be retrieved on workspace launch, rather than hardcoding.
+
+  * I also created an SNS topic as a billing alarm, to email me if the usage exceeds 80% of $100.  I ran the following to create a Topic ARN, and once it was generated, ran the next command to subscribe SNS to the billing alarm and to notify me when in alarm:
+
+  ```
+  aws sns create-topic --name billing-alarm
+
+  aws sns subscribe \
+    --topic-arn="<billing-alarm-arn>" \
+    --protocol=email \
+    --notification-endpoint=emailaddress@gmail.com
+```
+
+* I checked my email address, and confirmed the subscription so AWS will email me if the billing alarm goes off:
+
+![image](../_docs/assets/week0/SNSSubscription.png)
 
 ## Stretch Efforts
 

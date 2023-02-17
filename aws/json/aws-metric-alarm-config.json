@@ -3,10 +3,10 @@
     "AlarmDescription": "This alarm would be triggered if the daily estimated charges exceeds 10$",
     "ActionsEnabled": true,
     "AlarmActions": [
-        "SNS:TOPIC:ARN"
+        "arn:aws:sns:ca-central-1:504293607114:billing-alarm"
     ],
     "EvaluationPeriods": 1,
-    "DatapointsToAlarm": 5,
+    "DatapointsToAlarm": 1,
     "Threshold": 10,
     "ComparisonOperator": "GreaterThanOrEqualToThreshold",
     "TreatMissingData": "breaching",
