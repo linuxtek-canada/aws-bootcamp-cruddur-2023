@@ -23,6 +23,8 @@
 
   ![image](../_docs/assets/week0/SecurityRecommendations.png)
 
+  * Developed AWS CLI commands to set up CloudTrail auditing on all AWS accounts in the organization (see under stretch homework).
+  
 4.  Created Conceptual Diagram in Lucid Charts AND on a Napkin (for fun)
   
   * So I found this [napkin diagram](../_docs/assets/week0/InvestorNapkinConcept.png) in a bar downtown.  It might have been left by one of the company executives... I think he doodled a bit on it after his meeting.
@@ -35,16 +37,19 @@
 ![image](../_docs/assets/week0/CruddurConceptualDiagram.png)
 
 5.  Finished architectural diagram:
+
 ![image](../_docs/assets/week0/CruddurLogicalDiagram.png)
+
   * [Cruddur Logical Architectural Diagram](../_docs/assets/week0/CruddurLogicalDiagram.png).  
   * [Link to Lucid.app Diagram](https://lucid.app/lucidchart/7c5f8bda-7f82-4968-a9fa-9c824462d257/edit?viewport_loc=507%2C60%2C3072%2C1563%2C0_0&invitationId=inv_b5f72136-14bb-482f-9478-a8d4f15e3e20).
-  * Interesting to pull out the SVG file and have to edit it to get the color fill to work as per the video.  I actually did this, and got the exact color #25392B added.  
+  * Interesting to pull out the SVG file and have to edit it to get the color fill to work as per the video.  I was able to convert the [original](../_docs/assets/week0/momento_original.svg) inspected output to a [modified version](../_docs/assets/week0/momento.svg) as per the video, and got the exact color #25392B filled for the icon.  
   * I decided to add a few things to the entry point to help mitigate DDOS attacks.  Considering spend, [Amazon Cloudfront](https://aws.amazon.com/cloudfront/pricing/) is included in Free Tier, and could be handy to do some caching and delivery content.  Also, AWS Shield Standard to defend against DDOS attacks is included.  I also added [AWS Web Application Firewall](https://aws.amazon.com/waf/), focusing on the Bot Control feature, as you get 10 million common bot control requests per month within the AWS Free Tier.
   * If there was more spend allowed, I could look at using more advanced features, like [Web ACLs](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl.html) to limit IPs by region or country, [perform rate limiting](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html) to prevent spamming the web frontend or API backend, and other guardrails.  
 
 6.  Created IAM Admin user with [unique login](https://linuxtekbootcamp.signin.aws.amazon.com/console) alias.  I use a [hosted Bitwarden server](https://www.linuxtek.ca/2023/01/03/self-hosting-bitwarden-on-aws/) to save all my passwords, and it includes a random password generator.
 
 7.  Used AWS CloudShell in ca-central-1 region.  Yup, it works.
+
 ![image](../_docs/assets/week0/cloudshellwow.png)
 
 
@@ -72,6 +77,7 @@ tasks:
 ```
 
 Confirmed in Gitpod [User Settings > Variables](https://gitpod.io/user/variables) that variables are saved:
+
 ![image](../_docs/assets/week0/GitpodVariables.png)
 
 Started up a new Gitpod environment to confirm AWS CLI was installed correctly and AWS credentials were pulled from Gitpod variables to environment variables.  Successfully ran ```aws sts get-caller-identity``` and returned values.
@@ -96,6 +102,8 @@ This started to alarm almost right away, initially because of insufficient data,
   * I'm fortunate to have a lot of AWS credits from various sources including the AWS Community Builders Program, so I set the budget to $100 as I have plenty of credits to burn:
 
   ![image](../_docs/assets/week0/AWSCredits.png)
+
+  These credits are in my root AWS account within my Organization, however based on [this article](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilling-credits.html), credits are shared with all accounts that join an organization at any point in the month.  So there should be no issue with charges on this account, as it can draw from the AWS credits on the main account.
 
   I configured the JSON files in the aws/json directory and ran the following command to create the budget:
 
@@ -127,12 +135,116 @@ This started to alarm almost right away, initially because of insufficient data,
 
 ![image](../_docs/assets/week0/SNSSubscription.png)
 
-## Stretch Efforts
+## Stretch Homework Efforts
 
 * Added additional features to architectural diagram (explained above). Adding additional infrastructure on the Free Tier is within my skillset, and I'll try to add these features as we go along if possible.
+
 * Napkin diagram 😂.
+
 * Helping others in Discord.
+
 * [Article](https://www.linuxtek.ca/2023/02/07/aws-cloud-project-boot-camp-week-0-tips-and-tricks/) with Week 0 Tips and Tricks, including how to set up the Github repo via template, and setting up an AWS organization.
+
 * [Article](https://www.linuxtek.ca/2023/02/12/aws-cloud-project-bootcamp-week-0-unofficial-homework-guide/) to organize homework into unofficial guide.
+
 * Forum post to help others (with motivational cat picture):
 ![image](../_docs/assets/week0/GitpodForumPost.png)
+
+### Creating CloudTrail Auditing via AWS CLI
+
+* Watched section of Ashish's video on creating auditing logs in CloudTrail again.  Reviewed [AWS CLI documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudtrail/index.html) for CloudTrail on how to set up a CloudTrail via CLI, rather than ClickOps in the web console.  Used [create-trail](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudtrail/create-trail.html) command to create the CloudTrail auditing log on my main AWS account using the following:
+
+* First I need to create a KMS key to encrypt the logs.  Based on [this documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/index.html), I can execute a [create-key](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html) command by running the following:
+
+```
+aws kms create-key \
+  --multi-region \
+  --description "KMS Key for CloudTrail Audit Log Encryption" \
+  --tags TagKey="Name",TagValue="CloudTrail Audit KMS Key"
+```
+
+This outputs information on the KMS key, including the Key ID and ARN.  To add an alias for easy reading in the AWS Console, use the [create-alias](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/workmail/create-alias.html) command.  For example:
+
+```
+aws kms create-alias \
+  --alias-name "alias/CloudTrailAuditKey" \
+  --target-key-id <kms key id>
+```
+
+Once this is done, Checking in the web console, we can see the key created:
+
+![image](../_docs/assets/week0/awskmskey.png)
+
+Now in order for CloudTrail to use this KMS key for encryption, we have to add it to the key policy.  I used [this article](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-overview.html) as an example, and created an [aws-kms-cloudtrail-policy.json](../aws/json/aws-kms-cloudtrail-policy.json) file.  We can use the [put-key-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/put-key-policy.html) command to attach the policy to the KMS Key as follows:
+
+```
+aws kms put-key-policy \
+  --key-id <kms key id> \
+  --policy-name default \
+  --policy file://aws-kms-cloudtrail-policy.json \
+  --output text
+```
+
+* Now that the KMS key is set up, we have to create the S3 bucket to use.  We can create the S3 bucket using the [create-bucket](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/create-bucket.html) command:
+
+```
+aws s3api create-bucket \
+  --bucket <s3 bucket name> \
+  --region us-east-1
+```
+
+Going into S3, we can see the bucket created properly, but annoyingly public access is still enabled.  To fix this, I used [put-public-access-block](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-public-access-block.html) to ensure no public access on this bucket:
+
+```
+aws s3api put-public-access-block \
+  --bucket <s3 bucket name> \
+  --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+```
+Now when going into the web console, we can see that under Permissions, public access enabled:
+
+![image](../_docs/assets/week0/S3PublicAccessBlock.png)
+
+We also have to add a policy to the S3 bucket to allow CloudTrail to write to it.  [This article](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html) had a helpful example of the policy.  We can use the [put-bucket-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-policy.html) command to do this.
+Effectively, we need to allow CloudTrail to be able to write to this bucket.  I copied the JSON structure from another bucket, and edited it to use the correct ARN and service names, and uploaded it [here](../aws/json/aws-cloudtrail-s3-policy.json).  The command to attach the policy to the bucket would be:
+
+```
+aws s3api put-bucket-policy \
+  --bucket linuxtek-cloudtrail-audit-logs \
+  --policy file://aws-cloudtrail-s3-policy.json
+```
+
+Because we are setting up CloudTrail logging for all accounts in the organization, we first have to enable trusted service access using the following:
+
+```
+aws organizations enable-aws-service-access \
+  --service-principal cloudtrail.amazonaws.com
+```
+Now that we have the KMS Key and the S3 bucket set up and permissioned, we can create the CloudTrail with the following:
+
+```
+aws cloudtrail create-trail --name aws-cloudtrail-auditlog \
+  --s3-bucket-name <s3 bucket name> \
+  --kms-key-id <kms key id> \
+  --include-global-service-events \
+  --is-multi-region-trail \
+  --is-organization-trail \
+  --tags-list Key="Name",Value="CloudTrail Audit Logging"
+```
+This should return all of the JSON details for the CloudTrail configuration.
+
+Another annoying thing is that it does not start logging by default (yes, seriously).  This must be enabled manually, which can be done with the [start-logging](https://docs.aws.amazon.com/cli/latest/reference/cloudtrail/start-logging.html) command:
+
+```
+aws cloudtrail start-logging \
+  --name aws-cloudtrail-auditlog
+```
+
+And now we can see that CloudTrail is logging to S3 successfully:
+
+![image](../_docs/assets/week0/CloudTrailFinish.png)
+
+**Conclusion:**  Doing this via console is probably actually faster.  Or just write it in Terraform like your gut told you to.  Or just don't be so stubborn.  Still, was an interesting rabbit hole exercise and now we have the commands and policy.
+
+![image](../_docs/assets/week0/itsdone.gif)
+
+
