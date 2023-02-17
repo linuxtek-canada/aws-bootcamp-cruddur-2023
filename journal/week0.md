@@ -105,7 +105,11 @@ This started to alarm almost right away, initially because of insufficient data,
     --notifications-with-subscribers file://aws-budget-notifications-with-subscribers.json
   ```
 
-  * Note that I have the AWS Account ID set as an environment variable in Gitpod so it can automatically be retrieved on workspace launch, rather than hardcoding.
+  * Note that I have the AWS Account ID set as an environment variable in Gitpod so it can automatically be retrieved on workspace launch, rather than hardcoding.  I set this up in Gitpod via CLI using:
+  
+  ```
+  gp env AWS_ACCOUNT_ID=""
+  ```
 
   * I also created an SNS topic as a billing alarm, to email me if the usage exceeds 80% of $100.  I ran the following to create a Topic ARN, and once it was generated, ran the next command to subscribe SNS to the billing alarm and to notify me when in alarm:
 
