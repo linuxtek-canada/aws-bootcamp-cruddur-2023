@@ -140,13 +140,9 @@ This started to alarm almost right away, initially because of insufficient data,
 
 * Napkin diagram 😂.
 
-* Helping others in Discord.
+* Helping others in Discord by answering questions, redirecting to appropriate channels, and linking to resources.
 
-* [Article](https://www.linuxtek.ca/2023/02/07/aws-cloud-project-boot-camp-week-0-tips-and-tricks/) with Week 0 Tips and Tricks, including how to set up the Github repo via template, and setting up an AWS organization.
-
-* [Article](https://www.linuxtek.ca/2023/02/12/aws-cloud-project-bootcamp-week-0-unofficial-homework-guide/) to organize homework into unofficial guide.
-
-* Forum post to help others (with motivational cat picture):
+* Forum post to help others in #gitpod (with motivational cat picture):
 ![image](../_docs/assets/week0/GitpodForumPost.png)
 
 ### Creating CloudTrail Auditing via AWS CLI
@@ -242,8 +238,14 @@ And now we can see that CloudTrail is logging to S3 successfully:
 
 ![image](../_docs/assets/week0/CloudTrailFinish.png)
 
-**Conclusion:**  Doing this via console is probably actually faster.  Or just write it in Terraform like your gut told you to.  Or just don't be so stubborn.  Still, was an interesting rabbit hole exercise and now we have the commands and policy.
+**Conclusion:**  Doing this via console is probably actually faster.  Or I could just have written it in Terraform like my gut told me to.  Or I could just not be so stubborn.  
 
-![image](../_docs/assets/week0/itsdone.gif)
+![image](../_docs/assets/week0/nootnoot.jpg)
 
+Still, was an interesting rabbit hole exercise and now we have the commands and policy.
 
+## Publications
+
+* [Article](https://www.linuxtek.ca/2023/02/07/aws-cloud-project-boot-camp-week-0-tips-and-tricks/) with Week 0 Tips and Tricks, including how to set up the Github repo via template, and setting up an AWS organization.
+
+* [Article](https://www.linuxtek.ca/2023/02/12/aws-cloud-project-bootcamp-week-0-unofficial-homework-guide/) to organize homework into unofficial guide.
