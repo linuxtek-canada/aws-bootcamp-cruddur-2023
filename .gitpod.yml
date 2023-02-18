@@ -9,6 +9,13 @@ tasks:
       sudo ./aws/install
       cd $THEIA_WORKSPACE_ROOT
 
+  - name: Initialize Frontend and Backend
+    init: |
+      cd /workspace/aws-bootcamp-cruddur-2023/backend-flask
+      pip3 install -r requirements.txt
+      cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
+      npm i    
+
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
