@@ -244,6 +244,67 @@ And now we can see that CloudTrail is logging to S3 successfully:
 
 Still, was an interesting rabbit hole exercise and now we have the commands and policy.
 
+### Setting up root account Billing Alarm in CloudWatch
+
+I had gone through steps to set up a billing alarm in CloudWatch, but it was constantly alarming, so there is something wrong with the JSON in [this file](../aws/json/aws-metric-alarm-config.json).  I did some searching, and I couldn't find a good JSON example to use, so I decided to create one through the web console instead and see if I could pull the JSON from it.
+
+I deleted this alarm, and followed [this article](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) to create a CloudWatch alarm on my root AWS account, so if my spend goes out of control, it will alarm and trigger an SNS topic to email me.  I set it to alarm if I use more than $20 of AWS resources within 6 hours.  The configuration looked like this:
+
+![image](../_docs/assets/week0/CloudWatchAlarm.png)
+
+If I click Actions > View Source, I can get the alarm source, which is similar to this:
+
+```
+{
+    "Type": "AWS::CloudWatch::Alarm",
+    "Properties": {
+        "AlarmName": "cloudwatch-aws-billing-alarm",
+        "AlarmDescription": "Billing Alert for LinuxTek AWS",
+        "ActionsEnabled": true,
+        "OKActions": [],
+        "AlarmActions": [
+            "ARN OF SNS TOPIC"
+        ],
+        "InsufficientDataActions": [],
+        "MetricName": "EstimatedCharges",
+        "Namespace": "AWS/Billing",
+        "Statistic": "Maximum",
+        "Dimensions": [
+            {
+                "Name": "Currency",
+                "Value": "USD"
+            }
+        ],
+        "Period": 21600,
+        "EvaluationPeriods": 1,
+        "DatapointsToAlarm": 1,
+        "Threshold": 20,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "missing"
+    }
+}
+```
+
+The option is also there to give all of the switches to create this via AWS CLI:
+
+```
+aws cloudwatch put-metric-alarm \
+--alarm-name 'cloudwatch-aws-billing-alarm' \
+--alarm-description 'Billing Alert for LinuxTek AWS' \
+--actions-enabled \
+--alarm-actions 'ARN SNS TOPIC HERE' \
+--metric-name 'EstimatedCharges' \
+--namespace 'AWS/Billing' \
+--statistic 'Maximum' \
+--dimensions '[{"Name":"Currency","Value":"USD"}]' \
+--period 21600 \
+--evaluation-periods 1 \
+--datapoints-to-alarm 1 \
+--threshold 20 \
+--comparison-operator 'GreaterThanThreshold' \
+--treat-missing-data 'missing'
+```
+
 ## Publications
 
 * [Article](https://www.linuxtek.ca/2023/02/07/aws-cloud-project-boot-camp-week-0-tips-and-tricks/) with Week 0 Tips and Tricks, including how to set up the Github repo via template, and setting up an AWS organization.
