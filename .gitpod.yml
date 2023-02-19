@@ -1,4 +1,13 @@
 tasks:
+
+  - name: Update Gitpod Workspace Environment
+    init: |
+      sudo apt update 
+      sudo apt upgrade
+      sudo apt autoremove
+      sudo apt install -y nodejs
+      npm install -g npm@latest
+
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
