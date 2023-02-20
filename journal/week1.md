@@ -21,18 +21,14 @@ I noticed during the prep phase that NPM complained about being out of date:
 
 ![image](../_docs/assets/week1/NPM_Update.png)
 
-From running ```lsb_release -a``` I also found we are running Ubuntu Focal 20.04.  I ran an ```apt update && apt -y upgrade``` and noticed a lot of packages needing upgrades, so I decided to automate the updates.
-
-I thought about switching the image to a newer image but apparently the default [Workspace image](https://www.gitpod.io/docs/configure/workspaces/workspace-image) is configured fairly well and I don't want to set up a full build from scratch each time I launch a new workspace.  I added the following to the .gitpod.yml:
+From running ```lsb_release -a``` I also found we are running Ubuntu Focal 20.04.  I ran an ```apt update && apt -y upgrade``` and noticed a lot of packages needing upgrades, so I decided to automate the updates so it would be handled anytime a new Gitpod workspace spins up.  I thought about switching the image to a newer major version, but apparently the default [Workspace image](https://www.gitpod.io/docs/configure/workspaces/workspace-image) is configured fairly specifically, and I don't want to set up a full build from scratch each time I launch a new workspace.  I added the following to the .gitpod.yml:
 
 ```
   - name: Update Gitpod Workspace Environment
     init: |
-      sudo apt update 
-      sudo apt upgrade
-      sudo apt autoremove
-      sudo apt install -y nodejs
-      npm install -g npm@latest
+      sudo apt update && sudo apt upgrade -y
+      sudo apt autoremove -y    
+      npm install -g npm@latest      
 ```
 ### Automated Gitpod environment setup for local container testing
 
@@ -45,7 +41,8 @@ Added the following to the .gitpod.yml file to automate these steps whenever a n
       cd /workspace/aws-bootcamp-cruddur-2023/backend-flask
       pip3 install -r requirements.txt
       cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
-      npm i    
+      npm i
+      cd /workspace/aws-bootcamp-cruddur-2023/     
 ```
 Credit for the idea to im__Brooke#9621 in Discord for the idea, and we figured it out together.
 
