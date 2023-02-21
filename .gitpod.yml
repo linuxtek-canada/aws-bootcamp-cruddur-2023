@@ -17,14 +17,11 @@ tasks:
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
     init: |
-
       # Initialize NPM for starting containers
       cd $THEIA_WORKSPACE_ROOT/aws-bootcamp-cruddur-2023/backend-flask
       pip3 install -r requirements.txt
       cd $THEIA_WORKSPACE_ROOT/aws-bootcamp-cruddur-2023/frontend-react-js
-      npm i
-
-      # Back to main directory
+      npm i      
       cd $THEIA_WORKSPACE_ROOT
 
 # Add VSCode Extensions
