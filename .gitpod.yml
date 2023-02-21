@@ -1,3 +1,16 @@
+image:
+  file: .gitpod.Dockerfile
+
+github:
+  prebuilds:    
+    master: true    
+    branches: true    
+    pullRequests: true    
+    pullRequestsFromForks: false    
+    addCheck: true    
+    addComment: false    
+    addBadge: false
+
 tasks:
       
   - name: Workspace Initialization
@@ -5,18 +18,7 @@ tasks:
       AWS_CLI_AUTO_PROMPT: on-partial
     init: |
 
-      # Update OS and NPM
-      sudo apt update && sudo apt upgrade -y
-      sudo apt autoremove -y    
-      npm install -g npm@latest
-
-      # Install AWS CLI
-      cd /workspace
-      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      unzip awscliv2.zip
-      sudo ./aws/install      
-
-      # Install requirements for running app containers
+      # Initialize NPM for starting containers
       cd /workspace/aws-bootcamp-cruddur-2023/backend-flask
       pip3 install -r requirements.txt
       cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
@@ -25,6 +27,12 @@ tasks:
       # Back to main directory
       cd $THEIA_WORKSPACE_ROOT
 
+# Add VSCode Extensions
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
+    - ms-azuretools.vscode-docker
+    - ms-python.python
+    - hashicorp.terraform
+    - redhat.ansible
+    - amazonwebservices.aws-toolkit-vscode
