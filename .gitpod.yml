@@ -11,16 +11,15 @@ github:
     addComment: false    
     addBadge: false
 
-tasks:
-      
+tasks:      
   - name: Workspace Initialization
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
     init: |
       # Initialize NPM for starting containers
-      cd $THEIA_WORKSPACE_ROOT/aws-bootcamp-cruddur-2023/backend-flask
+      cd $THEIA_WORKSPACE_ROOT/backend-flask
       pip3 install -r requirements.txt
-      cd $THEIA_WORKSPACE_ROOT/aws-bootcamp-cruddur-2023/frontend-react-js
+      cd $THEIA_WORKSPACE_ROOT/frontend-react-js
       npm i      
       cd $THEIA_WORKSPACE_ROOT
 
