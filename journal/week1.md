@@ -8,10 +8,9 @@
 * Watched [Week 1 Live Streamed Video](https://www.youtube.com/live/zJnNe5Nv4tE?feature=share) during the livestream and followed along with the tasks.
 * Watched [Commit Your Code](https://youtu.be/b-idMgFFcpg) video.
 
-### Spending Considerations
+## Spending Considerations
 
-
-
+## Security Considerations
 
 ## Stretch Homework
 
@@ -43,3 +42,22 @@ Added the following to the .gitpod.yml init section to automate these steps when
 ```
 Credit for the idea to im__Brooke#9621 in Discord for the idea, and we figured it out together.
 
+### Fell down the Rabbit Hole with Gitpod for about 10 hours
+
+From some troubleshooting in the #gitpod Discord channel, we were trying to figure out why the AWS CLI utility was hanging on install.  The workaround solution I had was to group all of the init Tasks into one block, but I knew this wasn't the correct answer.  Andrew posted this message in announcements with a clue:
+
+![image](../_docs/assets/week1/GitpodAnnouncementHint.png)
+
+* I started by reviewing Andrew's [Cloud Development Environment](https://www.exampro.co/exp-cde-01) course on ExamPro.
+* Tested a number of Tasks scenarios, enabled and tested Prebuilds, and set up a Custom Workspace Image using a .gitpod.Dockerfile.
+* Based on what I found, we shouldn't be doing any global package/module installs using Tasks as the install won't persist if it's part of the init stage, or modifies files outside of the /workspace directory.
+
+![image](../_docs/assets/week1/10hourslater.jpg)
+
+* Wrote up [an article](https://www.linuxtek.ca/2023/02/21/diving-deeper-gitpod-cloud-development-environment/) detailing everything I had found.
+* Asked some questions in the Gitpod Discord, and got some feedback to fix up the article.
+
+## Publications
+
+* [AWS Cloud Project Bootcamp – Week 1: Unofficial Homework Guide](https://www.linuxtek.ca/2023/02/18/aws-cloud-project-bootcamp-week-1-unofficial-homework-guide/)
+* [Diving Deeper – Gitpod Cloud Development Environment](https://www.linuxtek.ca/2023/02/21/diving-deeper-gitpod-cloud-development-environment/)
