@@ -4,9 +4,20 @@
 
 ### Video Review
 
-* Watched [Grading Homework Summaries](https://youtu.be/FKAScachFgk)
+* Watched [How to Ask for Technical Help](https://youtu.be/tDPqmwKMP7Y) video.
+* Watched [Grading Homework Summaries](https://youtu.be/FKAScachFgk) video.
 * Watched [Week 1 Live Streamed Video](https://www.youtube.com/live/zJnNe5Nv4tE?feature=share) during the livestream and followed along with the tasks.
 * Watched [Commit Your Code](https://youtu.be/b-idMgFFcpg) video.
+* Watched [Chirag's Week 1 Spend Consideration](https://youtu.be/OAMHu1NiYoI) video.
+* Watched [Ashish's Week 1 Security Consideration](https://youtu.be/OjZz4D0B-cA) video.
+* Watched [Week 1 - Create the notification feature (Backend and Front)](https://youtu.be/k-_o0cCpksk) video.
+  * The hardcoded confirmation code is '1234'.
+  * [OpenAPI Specification v3.1.0](https://spec.openapis.org/oas/v3.1.0)
+
+### Actions
+
+* Completed all steps during the livestream to containerize the application.
+* Went through documenting the notification endpoint for the OpenAI Document.
 
 ## Spending Considerations
 
