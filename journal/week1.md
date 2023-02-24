@@ -11,7 +11,7 @@
 * Watched [Chirag's Week 1 Spend Consideration](https://youtu.be/OAMHu1NiYoI) video.
 * Watched [Ashish's Week 1 Security Consideration](https://youtu.be/OjZz4D0B-cA) video.
 * Watched [Week 1 - Create the notification feature (Backend and Front)](https://youtu.be/k-_o0cCpksk) video.
-  * The hardcoded confirmation code is '1234'.
+  * The hardcoded confirmation code when registering an account with Cruddur is '1234'.
   * [OpenAPI Specification v3.1.0](https://spec.openapis.org/oas/v3.1.0)
 
 ### Actions
@@ -46,7 +46,7 @@ I noticed during the prep phase that NPM complained about being out of date:
 
 ![image](../_docs/assets/week1/NPM_Update.png)
 
-From running ```lsb_release -a``` I also found we are running Ubuntu Focal 20.04.  I ran an ```apt update && apt -y upgrade``` and noticed a lot of packages needing upgrades, so I decided to automate the updates so it would be handled anytime a new Gitpod workspace spins up.  I thought about switching the image to a newer major version, but apparently the default [Workspace image](https://www.gitpod.io/docs/configure/workspaces/workspace-image) is configured fairly specifically, and I don't want to set up a full build from scratch each time I launch a new workspace.  I added the following to the .gitpod.yml init section:
+From running ```lsb_release -a``` I also found we are running Ubuntu Focal 20.04.  I ran an ```apt update && apt -y upgrade``` and noticed a lot of packages needing upgrades, so I decided to automate the updates so it would be handled anytime a new Gitpod workspace spins up.  I thought about switching the image to a newer major version like Ubuntu 22.04 Jammy Jellyfish, but apparently the default [Workspace image](https://www.gitpod.io/docs/configure/workspaces/workspace-image) is configured fairly specifically with tools and I don't want to mess too much with compatibility.  I added the following to the .gitpod.yml init section:
 
 ```
       sudo apt update && sudo apt upgrade -y
@@ -67,6 +67,7 @@ Added the following to the .gitpod.yml init section to automate these steps when
       cd /workspace/aws-bootcamp-cruddur-2023/     
 ```
 Credit for the idea to im__Brooke#9621 in Discord for the idea, and we figured it out together.
+Basically for any future Gitpod spinups, I can go right to ```docker compose up``` when I'm ready with code changes.
 
 ### Modified Gitpod startup to create Custom Workspace Image (correct)
 
@@ -83,6 +84,22 @@ No seriously. I spent 10 hours on Tuesday Feb 21 researching and testing scenari
 
 * Wrote up [an article](https://www.linuxtek.ca/2023/02/21/diving-deeper-gitpod-cloud-development-environment/) detailing everything I had found.
 * Asked some questions in the Gitpod Discord, and got some feedback to fix up the article.
+
+So now the Gitpod Workspace builds a custom image based on the referenced [.gitpod.Dockerfile](../.gitpod.Dockerfile).  There are still some commands I left in .gitpod.yml to initialize things to get ready to run a ```docker compose up```, and this runs as part of Prebuild.
+
+Also added a bunch of extensions to automatically get added to Gitpod VS Code Browser.  Will continue to add to these:
+
+```
+vscode:
+  extensions:
+    - 42Crunch.vscode-openapi
+    - ms-azuretools.vscode-docker
+    - ms-python.python
+    - hashicorp.terraform
+    - redhat.ansible
+    - redhat.vscode-yaml
+    - amazonwebservices.aws-toolkit-vscode
+```
 
 ## Publications
 
