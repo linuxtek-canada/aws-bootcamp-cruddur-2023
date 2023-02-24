@@ -31,7 +31,7 @@
   * Tested connecting to DynamoDB Local using ```aws dynamodb list-tables --endpoint-url http://localhost:8000``` which returned empty table info successfully.  I intentionally didn't add the Music tables.
     ![image](../_docs/assets/week1/DynamoDBTest.png)  
 
-  * Added steps to install PostgreSQL Client into [.gitpod.Dockerfile](../.gitpod.Dockerfile) and tested using ```psql -h localhost -p 5432 -U postgres -P password -d postgres```
+  * Added steps to install PostgreSQL Client into [.gitpod.Dockerfile](../.gitpod.Dockerfile) and tested using ```psql -h localhost -p 5432 -U postgres -d postgres```
     ![image](../_docs/assets/week1/PostgresClientTest.png)
 
 ## Spending Considerations
@@ -104,6 +104,8 @@ vscode:
 ### Cleaned up DynamoDB Location for Local Environment
 
 Noticed a ```docker/dynamodb/shared-local-instance.db``` file getting created when I did a ```docker compose up``` with DynamoDB and PostgreSQL configured.  From researching, found [this doc](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html) that explains this is created if the -shareDb option is used (which we are).  I didn't want the database to get committed to the repo, so added the directory to a .gitignore file in the root repo directory.  I researched changing the local directory but as long as it only builds on test, and doesn't get committed, it's not a problem.
+
+Rewatched the video for DynamoDB/Postgres and Andrew had done this as well (I found out afterwards).
 
 ## Publications
 
