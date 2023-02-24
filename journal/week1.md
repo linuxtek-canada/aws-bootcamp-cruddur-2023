@@ -17,7 +17,14 @@
 ### Actions
 
 * Completed all steps during the livestream to containerize the application.
-* Went through documenting the notification endpoint for the OpenAI Document.
+* Went through [video](https://youtu.be/k-_o0cCpksk) steps and added frontend and backend notifications functionality.
+  * Documented notification endpoint for OpenAPI document.
+  * Wrote Flask backend endpoint for notifications.
+  * Wrote React page for notifications. 
+* Went through [video](https://youtu.be/CbQNMaa6zTg) steps to set up PostgreSQL and DynamoDB Local
+  * Ran DynamoDB Local container to ensure it worked
+  * Ran Postgres container to ensure it worked
+  * [AWS Documentation - DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html)
 
 ## Spending Considerations
 

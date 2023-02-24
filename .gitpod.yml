@@ -31,4 +31,5 @@ vscode:
     - ms-python.python
     - hashicorp.terraform
     - redhat.ansible
+    - redhat.vscode-yaml
     - amazonwebservices.aws-toolkit-vscode
