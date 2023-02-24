@@ -103,7 +103,7 @@ vscode:
 
 ### Cleaned up DynamoDB Location for Local Environment
 
-Noticed a ```docker/dynamodb/shared-local-instance.db``` file getting created when I did a ```docker compose up``` with DynamoDB and PostgreSQL configured.  From researching, found [this doc](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html) that explains this is created if the -shareDb option is used.  I didn't want the database to get committed to the repo, so added the directory to a .gitignore file in the root repo directory.  
+Noticed a ```docker/dynamodb/shared-local-instance.db``` file getting created when I did a ```docker compose up``` with DynamoDB and PostgreSQL configured.  From researching, found [this doc](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html) that explains this is created if the -shareDb option is used (which we are).  I didn't want the database to get committed to the repo, so added the directory to a .gitignore file in the root repo directory.  I researched changing the local directory but as long as it only builds on test, and doesn't get committed, it's not a problem.
 
 ## Publications
 
