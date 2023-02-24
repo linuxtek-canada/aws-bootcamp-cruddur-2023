@@ -29,10 +29,12 @@
   * [100 Days of Cloud - DynamoDB Local Challenge](https://github.com/100DaysofCloud/challenge-dynamodb-local)
 
   * Tested connecting to DynamoDB Local using ```aws dynamodb list-tables --endpoint-url http://localhost:8000``` which returned empty table info successfully.  I intentionally didn't add the Music tables.
-    ![image](../_docs/assets/week1/DynamoDBTest.png)  
+ 
+![image](../_docs/assets/week1/DynamoDBTest.png)  
 
   * Added steps to install PostgreSQL Client into [.gitpod.Dockerfile](../.gitpod.Dockerfile) and tested using ```psql -h localhost -p 5432 -U postgres -d postgres```
-    ![image](../_docs/assets/week1/PostgresClientTest.png)
+ 
+![image](../_docs/assets/week1/PostgresClientTest.png)
 
 ## Spending Considerations
 
