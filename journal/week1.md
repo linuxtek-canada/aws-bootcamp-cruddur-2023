@@ -17,14 +17,22 @@
 ### Actions
 
 * Completed all steps during the livestream to containerize the application.
+  * Reviewed notes and code in [Github - Week 1](https://github.com/omenking/aws-bootcamp-cruddur-2023/blob/week-1/journal/week1.md).
 * Went through [video](https://youtu.be/k-_o0cCpksk) steps and added frontend and backend notifications functionality.
   * Documented notification endpoint for OpenAPI document.
   * Wrote Flask backend endpoint for notifications.
   * Wrote React page for notifications. 
 * Went through [video](https://youtu.be/CbQNMaa6zTg) steps to set up PostgreSQL and DynamoDB Local
   * Ran DynamoDB Local container to ensure it worked
-  * Ran Postgres container to ensure it worked
+  * Ran Postgres container to ensure it worked  
   * [AWS Documentation - DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html)
+  * [100 Days of Cloud - DynamoDB Local Challenge](https://github.com/100DaysofCloud/challenge-dynamodb-local)
+
+  * Tested connecting to DynamoDB Local using ```aws dynamodb list-tables --endpoint-url http://localhost:8000``` which returned empty table info successfully.  I intentionally didn't add the Music tables.
+    ![image](../_docs/assets/week1/DynamoDBTest.png)  
+
+  * Added steps to install PostgreSQL Client into [.gitpod.Dockerfile](../.gitpod.Dockerfile) and tested using ```psql -h localhost -p 5432 -U postgres -P password -d postgres```
+    ![image](../_docs/assets/week1/PostgresClientTest.png)
 
 ## Spending Considerations
 
@@ -32,7 +40,7 @@
 
 ## Stretch Homework
 
-### Added steps to update Gitpod environment
+### Added steps to update Gitpod environment (incorrect)
 
 I noticed during the prep phase that NPM complained about being out of date:
 
@@ -46,7 +54,7 @@ From running ```lsb_release -a``` I also found we are running Ubuntu Focal 20.04
       npm install -g npm@latest      
 ```
 
-### Automated Gitpod environment setup for local container testing
+### Automated Gitpod environment setup for local container testing (incorrect)
 
 As part of the setup to get the app to run locally in Python, we needed to ensure all the modules in requirements.txt are installed, as well as do an npm install before building the container, so it can copy the contents of node_modules.
 Added the following to the .gitpod.yml init section to automate these steps whenever a new Gitpod workspace is spun up:
@@ -60,7 +68,7 @@ Added the following to the .gitpod.yml init section to automate these steps when
 ```
 Credit for the idea to im__Brooke#9621 in Discord for the idea, and we figured it out together.
 
-### Fell down the Rabbit Hole with Gitpod for about 10 hours
+### Modified Gitpod startup to create Custom Workspace Image (correct)
 
 From some troubleshooting in the #gitpod Discord channel, we were trying to figure out why the AWS CLI utility was hanging on install.  The workaround solution I had was to group all of the init Tasks into one block, but I knew this wasn't the correct answer.  Andrew posted this message in announcements with a clue:
 
@@ -71,6 +79,7 @@ From some troubleshooting in the #gitpod Discord channel, we were trying to figu
 * Based on what I found, we shouldn't be doing any global package/module installs using Tasks as the install won't persist if it's part of the init stage, or modifies files outside of the /workspace directory.
 
 ![image](../_docs/assets/week1/10hourslater.jpg)
+No seriously. I spent 10 hours on Tuesday Feb 21 researching and testing scenarios in Gitpod, writing an article up, revising, etc.
 
 * Wrote up [an article](https://www.linuxtek.ca/2023/02/21/diving-deeper-gitpod-cloud-development-environment/) detailing everything I had found.
 * Asked some questions in the Gitpod Discord, and got some feedback to fix up the article.
