@@ -101,6 +101,10 @@ vscode:
     - amazonwebservices.aws-toolkit-vscode
 ```
 
+### Cleaned up DynamoDB Location for Local Environment
+
+Noticed a ```docker/dynamodb/shared-local-instance.db``` file getting created when I did a ```docker compose up``` with DynamoDB and PostgreSQL configured.  From researching, found [this doc](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html) that explains this is created if the -shareDb option is used.  I didn't want the database to get committed to the repo, so added the directory to a .gitignore file in the root repo directory.  
+
 ## Publications
 
 * [AWS Cloud Project Bootcamp – Week 1: Unofficial Homework Guide](https://www.linuxtek.ca/2023/02/18/aws-cloud-project-bootcamp-week-1-unofficial-homework-guide/)

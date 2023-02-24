@@ -1,0 +1,3 @@
+# Ignoring docker folder created by DynamoDB default
+docker/
+docker/*
