@@ -3,13 +3,14 @@ version: "3.8"
 services:
 
   backend-flask:
+    container_name: cruddur-backend
     environment:
       FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
       BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
     build: 
       context: ./backend-flask
       dockerfile: Dockerfile.prod
-    
+    image: ${DOCKER_USERNAME}/cruddur-backend:latest
     ports:
       - "4567:4567"
     volumes:
@@ -22,11 +23,13 @@ services:
       start_period: 30s
 
   frontend-react-js:
+    container_name: cruddur-frontend
     environment:
       REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
     build: 
       context: ./frontend-react-js
       dockerfile: Dockerfile.prod
+    image: ${DOCKER_USERNAME}/cruddur-frontend:latest
     ports:
       - "3000:3000"
     volumes:

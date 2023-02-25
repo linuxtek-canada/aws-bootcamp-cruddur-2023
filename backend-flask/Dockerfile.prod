@@ -1,11 +1,14 @@
 FROM python:3.10-slim-buster as build
 WORKDIR /backend-flask
+
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
+COPY . . 
+
 
 FROM python:3.10-slim-buster
 WORKDIR /backend-flask
-COPY --from=build /backend-flask /backend-flask
+COPY --from=build . .
 # Had to add this back to ensure Flask was installed in the new image
 RUN pip3 install -r requirements.txt
 RUN apt update && apt install -y curl

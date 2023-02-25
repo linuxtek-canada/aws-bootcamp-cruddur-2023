@@ -179,7 +179,88 @@ Appears that only frontend image was significantly reduced in size.
 * Reviewed Docker documentation on [docker login](https://docs.docker.com/engine/reference/commandline/login/).
 * Added variables to Gitpod DOCKER_USERNAME and DOCKER_PASSWORD using ```gp env```.
 * Added command to perform Docker login on workspace startup.
-* Restarted Gitpod environment and tested.
+* Restarted Gitpod environment and tested, and it does work with a bit of a warning.
+
+![image](../_docs/assets/week1/DockerLogin.png)
+
+* Moving passwords and sensitive credentials to AWS Secrets Manager or Hashicorp Vault will be a later goal.
+* Tested build and push to Docker Hub:
+
+```
+docker compose -f docker-compose-prod.yml up
+docker compose -f docker-compose-prod.yml build
+docker compose -f docker-compose-prod.yml push
+```
+
+* Push appears to have been successful:
+
+![image](../_docs/assets/week1/DockerPushOK.png)
+
+
+
+* Checking Docker Hub, images are present:
+
+![image](../_docs/assets/week1/DockerHubOK.png)
+
+### Launch Images on EC2
+
+Now that the images are built and stored in Docker Hub, I tried a quick test to see if I could get them to pull down and launch on an EC2 instance.
+
+* I created a Key Pair, importing my local workstation public key.
+* I checked the AMI Marketplace for an image that already had Docker installed.  
+* I chose the **Amazon ECS-Optimized Amazon Linux 2 (AL2) x86_64 AMI** image - AMI ID# ami-05e7fa5a3b6085a75. 
+* I used a t2.micro instance which is Free Tier eligible.
+* I created a security group to allow SSH traffic, as well as TCP traffic on port 3000 and 4567 so I could access the frontend and backend over the internet:
+
+![image](../_docs/assets/week1/DockerTestSG.png)
+
+* Once the instance was up, I logged in as ec2-user (default Amazon 2 username).
+* Confirmed Docker was installed by default:
+
+```
+[ec2-user@ip-172-31-54-255 ~]$ docker --version
+Docker version 20.10.17, build 100c701
+```
+
+* To test that the images can run without any of the Gitpod workspace requirements, I first pulled down the images using [docker pull](https://docs.docker.com/engine/reference/commandline/pull/):
+
+```
+docker login <redacted>
+docker image pull linuxtekca/cruddur-frontend:latest
+docker image pull linuxtekca/cruddur-backend:latest
+docker image ls
+sudo yum install -y vim
+```
+
+* To run the frontend and backend images manually, I used the following from a previous step as a shell script:
+
+```
+#!/bin/bash
+mkdir ~/backend-flask
+mkdir ~/frontend-react-js
+docker run --rm -p 3000:3000 -d -e FRONTEND_URL='*' -e BACKEND_URL='*' linuxtekca/cruddur-frontend:latest
+docker run --rm -p 4567:4567 -d -e FRONTEND_URL='*' -e BACKEND_URL='*' linuxtekca/cruddur-backend:latest
+```
+
+* At this point, I got errors starting both images due to missing files. 
+* This suggested to me that we are dependent on our local source files, so I tested that.
+* Ran the following to install and set up git on EC2:
+
+```
+sudo yum install -y git
+git config --global user.name "<username>"
+git config --global user.email "<linuxtek.canada@gmail.com>"
+git clone https://github.com/linuxtek-canada/aws-bootcamp-cruddur-2023.git
+```
+
+
+
+
+
+
+
+
+
 
 ## Publications
 
