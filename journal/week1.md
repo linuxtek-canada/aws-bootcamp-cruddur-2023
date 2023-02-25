@@ -202,11 +202,11 @@ Appears that only frontend image was significantly reduced in size.
 ### Pushed images to Docker Hub
 
 * Reviewed Docker documentation on [docker compose push](https://docs.docker.com/engine/reference/commandline/compose_push/).
-* Created new Docker Hub account for linuxtekca.
+* Created new Docker Hub account.
 * Modified docker-compose-prod.yml to push to DockerHub.
 * Reviewed Docker documentation on [docker login](https://docs.docker.com/engine/reference/commandline/login/).
 * Added variables to Gitpod DOCKER_USERNAME and DOCKER_PASSWORD using ```gp env```.
-* Added command to perform Docker login on workspace startup.
+* Added command to .gitpod.yml to perform Docker login on workspace startup using these environment variables.
 * Restarted Gitpod environment and tested, and it does work with a bit of a warning:
 
 ![image](../_docs/assets/week1/DockerLogin.png)
