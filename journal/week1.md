@@ -173,7 +173,7 @@ Appears that only frontend image was significantly reduced in size.
 
 **Note:**  There is a problem with the multi-stage build to correct.  It works properly with a ```docker compose up``` but when built and launched in EC2, it cannot find critical files.  Will investigate further.
 
-### Implemented Health Checks in Frontend and Backend Dockerfiles
+### Implemented Health Checks in Frontend and Backend
 
 * Read through [Docker Documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/) on Docker Compose v3 healthchecks.
 * Added a healthcheck block into both the normal and production docker-compose files to test the frontend (3000) and backend (4567) ports.
