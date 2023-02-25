@@ -37,8 +37,12 @@
 ![image](../_docs/assets/week1/PostgresClientTest.png)
 
 ## Spending Considerations
+* Watched video.  Did not have time for additional activities on spend considerations this week.
 
 ## Security Considerations
+* Watched video.  Did not have time for additional activities on security considerations this week.
+* Had seen that npm finds a lot of vulnerabilities, and normally you would want to fix thsees, but upgrading versions of dependencies could break the app.  We had a discussion about this in the Discord.
+* One action item for later on is to set up AWS Secrets Manager to store the secrets instead of in Gitpod, once we move more out of local development.
 
 ## Stretch Homework
 
@@ -51,9 +55,9 @@ I noticed during the prep phase that NPM complained about being out of date:
 From running ```lsb_release -a``` I also found we are running Ubuntu Focal 20.04.  I ran an ```apt update && apt -y upgrade``` and noticed a lot of packages needing upgrades, so I decided to automate the updates so it would be handled anytime a new Gitpod workspace spins up.  I thought about switching the image to a newer major version like Ubuntu 22.04 Jammy Jellyfish, but apparently the default [Workspace image](https://www.gitpod.io/docs/configure/workspaces/workspace-image) is configured fairly specifically with tools and I don't want to mess too much with compatibility.  I added the following to the .gitpod.yml init section:
 
 ```
-      sudo apt update && sudo apt upgrade -y
-      sudo apt autoremove -y    
-      npm install -g npm@latest      
+sudo apt update && sudo apt upgrade -y
+sudo apt autoremove -y    
+npm install -g npm@latest      
 ```
 
 ### Automated Gitpod environment setup for local container testing (incorrect)
@@ -62,11 +66,11 @@ As part of the setup to get the app to run locally in Python, we needed to ensur
 Added the following to the .gitpod.yml init section to automate these steps whenever a new Gitpod workspace is spun up:
 
 ```
-      cd /workspace/aws-bootcamp-cruddur-2023/backend-flask
-      pip3 install -r requirements.txt
-      cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
-      npm i
-      cd /workspace/aws-bootcamp-cruddur-2023/     
+cd /workspace/aws-bootcamp-cruddur-2023/backend-flask
+pip3 install -r requirements.txt
+cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
+npm i
+cd /workspace/aws-bootcamp-cruddur-2023/     
 ```
 Credit for the idea to im__Brooke#9621 in Discord for the idea, and we figured it out together.
 Basically for any future Gitpod spinups, I can go right to ```docker compose up``` when I'm ready with code changes.
@@ -83,7 +87,7 @@ From some troubleshooting in the #gitpod Discord channel, we were trying to figu
 
 <img src="../_docs/assets/week1/10hourslater.jpg" alt= “” width="50%" height="50%">
 
-No seriously. I spent 10 hours on Tuesday Feb 21 researching and testing scenarios in Gitpod, writing an article up, revising, etc.
+No seriously. I spent 10 hours on Tuesday Feb 21, 2023 researching and testing scenarios in Gitpod, writing an article up, revising, etc.
 
 * Wrote up [an article](https://www.linuxtek.ca/2023/02/21/diving-deeper-gitpod-cloud-development-environment/) detailing everything I had found.
 * Asked some questions in the Gitpod Discord, and got some feedback to fix up the article.
@@ -110,7 +114,29 @@ Noticed a ```docker/dynamodb/shared-local-instance.db``` file getting created wh
 
 Rewatched the video for DynamoDB/Postgres and Andrew had done this as well (I found out afterwards).
 
-### Rebuilt Docker containers using multi-stage to reduce size.
+Asked during office hours about where the database files are stored for PostgreSQL.  One of the students (credit to him) explained how the volumes location for db maps.  Looking at the Docker extension in VS Code, we can go to **Volumes > aws-bootcamp-cruddur-2023_db**, right click and Inspect.  We can see that it maps to:
+
+```
+{
+    "CreatedAt": "2023-02-25T16:12:13Z",
+    "Driver": "local",
+    "Labels": {
+        "com.docker.compose.project": "aws-bootcamp-cruddur-2023",
+        "com.docker.compose.version": "2.16.0",
+        "com.docker.compose.volume": "db"
+    },
+    "Mountpoint": "/workspace/.docker-root/volumes/aws-bootcamp-cruddur-2023_db/_data",
+    "Name": "aws-bootcamp-cruddur-2023_db",
+    "Options": null,
+    "Scope": "local"
+}
+```
+
+From this, we can see the mountpoint for volume db, and checking that location, we can see the postgres files:
+
+![image](../_docs/assets/week1/DockerVolumePostgres.png)
+
+### Rebuilt Docker containers using multi-stage to reduce size (in-progress).
 
 Ran a ```docker compose build``` to do a build of the completed code.  Checking ```docker image ls```, we can see the sizes here:
 
@@ -144,6 +170,8 @@ amazon/dynamodb-local                         latest      904626f640dc   3 weeks
 ```
 
 Appears that only frontend image was significantly reduced in size.
+
+**Note:**  There is a problem with the multi-stage build to correct.  It works properly with a ```docker compose up``` but when built and launched in EC2, it cannot find critical files.  Will investigate further.
 
 ### Implemented Health Checks in Frontend and Backend Dockerfiles
 
@@ -179,7 +207,7 @@ Appears that only frontend image was significantly reduced in size.
 * Reviewed Docker documentation on [docker login](https://docs.docker.com/engine/reference/commandline/login/).
 * Added variables to Gitpod DOCKER_USERNAME and DOCKER_PASSWORD using ```gp env```.
 * Added command to perform Docker login on workspace startup.
-* Restarted Gitpod environment and tested, and it does work with a bit of a warning.
+* Restarted Gitpod environment and tested, and it does work with a bit of a warning:
 
 ![image](../_docs/assets/week1/DockerLogin.png)
 
@@ -196,8 +224,6 @@ docker compose -f docker-compose-prod.yml push
 
 ![image](../_docs/assets/week1/DockerPushOK.png)
 
-
-
 * Checking Docker Hub, images are present:
 
 ![image](../_docs/assets/week1/DockerHubOK.png)
@@ -206,15 +232,15 @@ docker compose -f docker-compose-prod.yml push
 
 Now that the images are built and stored in Docker Hub, I tried a quick test to see if I could get them to pull down and launch on an EC2 instance.
 
-* I created a Key Pair, importing my local workstation public key.
-* I checked the AMI Marketplace for an image that already had Docker installed.  
-* I chose the **Amazon ECS-Optimized Amazon Linux 2 (AL2) x86_64 AMI** image - AMI ID# ami-05e7fa5a3b6085a75. 
-* I used a t2.micro instance which is Free Tier eligible.
-* I created a security group to allow SSH traffic, as well as TCP traffic on port 3000 and 4567 so I could access the frontend and backend over the internet:
+* Created a Key Pair, importing my local workstation public key.
+* Checked the AMI Marketplace for an image that already had Docker installed.  
+* Chose the **Amazon ECS-Optimized Amazon Linux 2 (AL2) x86_64 AMI** image - AMI ID# ami-05e7fa5a3b6085a75.
+* Used a t2.micro instance which is Free Tier eligible.
+* Created a security group to allow SSH traffic, as well as TCP traffic on port 3000 and 4567 so I could access the frontend and backend over the internet:
 
 ![image](../_docs/assets/week1/DockerTestSG.png)
 
-* Once the instance was up, I logged in as ec2-user (default Amazon 2 username).
+* Once the instance was up, I logged in as ec2-user (default Amazon 2 username) using my SSH key pair.
 * Confirmed Docker was installed by default:
 
 ```
@@ -225,7 +251,7 @@ Docker version 20.10.17, build 100c701
 * To test that the images can run without any of the Gitpod workspace requirements, I first pulled down the images using [docker pull](https://docs.docker.com/engine/reference/commandline/pull/):
 
 ```
-docker login <redacted>
+docker login -u <redacted>
 docker image pull linuxtekca/cruddur-frontend:latest
 docker image pull linuxtekca/cruddur-backend:latest
 docker image ls
@@ -236,30 +262,17 @@ sudo yum install -y vim
 
 ```
 #!/bin/bash
-mkdir ~/backend-flask
-mkdir ~/frontend-react-js
 docker run --rm -p 3000:3000 -d -e FRONTEND_URL='*' -e BACKEND_URL='*' linuxtekca/cruddur-frontend:latest
 docker run --rm -p 4567:4567 -d -e FRONTEND_URL='*' -e BACKEND_URL='*' linuxtekca/cruddur-backend:latest
 ```
 
-* At this point, I got errors starting both images due to missing files. 
-* This suggested to me that we are dependent on our local source files, so I tested that.
-* Ran the following to install and set up git on EC2:
+* **Note:** This threw errors when running my production multi-stage build, but worked properly when testing the normally build "dev" images.  Will have to investigate.
 
-```
-sudo yum install -y git
-git config --global user.name "<username>"
-git config --global user.email "<linuxtek.canada@gmail.com>"
-git clone https://github.com/linuxtek-canada/aws-bootcamp-cruddur-2023.git
-```
+* Properly launched cruddur-frontend-dev and cruddur-backend-dev images:
 
+![image](../_docs/assets/week1/CruddurFrontendEC2.png)
 
-
-
-
-
-
-
+![image](../_docs/assets/week1/CruddurBackendEC2.png)
 
 
 ## Publications
