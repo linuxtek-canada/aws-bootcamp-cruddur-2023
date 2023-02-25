@@ -1,0 +1,19 @@
+https://ui.honeycomb.io/
+https://docs.honeycomb.io/getting-data-in/opentelemetry/python/
+https://xkcd.com/1597/
+https://honeycomb-whoami.glitch.me
+https://docs.honeycomb.io/getting-data-in/data-best-practices/
+
+gp env HONEYCOMB_API_KEY="
+
+Article Ideas:
+* OpenTelemetry - Andrew Course KCNA:  https://www.youtube.com/watch?v=AplluksKvzI
+* Git Tagging
+
+Use different dockerfile for development vs production - hot reload, shell out, look at things...
+Rich base image like Ubuntu
+Production use Alpine, almost nothing installed.
+
+gcr.io/distroless/python3-debian11 
+stripped image that only contain things that require app to run (for example ideally in prod you would not found pip in the image
+
