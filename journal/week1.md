@@ -81,7 +81,8 @@ From some troubleshooting in the #gitpod Discord channel, we were trying to figu
 * Tested a number of Tasks scenarios, enabled and tested Prebuilds, and set up a Custom Workspace Image using a .gitpod.Dockerfile.
 * Based on what I found, we shouldn't be doing any global package/module installs using Tasks as the install won't persist if it's part of the init stage, or modifies files outside of the /workspace directory.
 
-![image](../_docs/assets/week1/10hourslater.jpg)
+<img src="../_docs/assets/week1/10hourslater.jpg" alt= “” width="50%" height="50%">
+
 No seriously. I spent 10 hours on Tuesday Feb 21 researching and testing scenarios in Gitpod, writing an article up, revising, etc.
 
 * Wrote up [an article](https://www.linuxtek.ca/2023/02/21/diving-deeper-gitpod-cloud-development-environment/) detailing everything I had found.
@@ -121,8 +122,7 @@ postgres                                      13-alpine   55f14697b527   13 days
 amazon/dynamodb-local                         latest      904626f640dc   3 weeks ago          499MB
 ```
 
-Ran a ```docker image prune -a``` to clear all stored images and start fresh.
-
+* Ran a ```docker image prune -a``` to clear all stored images and start fresh.
 * Read through [Docker Docs](https://docs.docker.com/build/building/multi-stage/) on multi-stage builds to understand how they work.
 * Read through [this article](https://mherman.org/blog/dockerizing-a-react-app/) on Dockerizing a React app.
 * Read through [100 Days of Cloud Article](http://100daysofdevops.com/use-multi-stage-builds-with-dockerfile/) on Multi-Stage builds.
@@ -169,7 +169,17 @@ Appears that only frontend image was significantly reduced in size.
 * For my production Alpine build, I added ```RUN apk --no-cache add curl``` instead to install curl.
 * After a rebuild and bringing up the containers, they both show healthy after the start period:
 
-![image](../_docs/assets/week1/HealthCheckSuccess.png
+![image](../_docs/assets/week1/HealthCheckSuccess.png)
+
+### Pushed images to Docker Hub
+
+* Reviewed Docker documentation on [docker compose push](https://docs.docker.com/engine/reference/commandline/compose_push/).
+* Created new Docker Hub account for linuxtekca.
+* Modified docker-compose-prod.yml to push to DockerHub.
+* Reviewed Docker documentation on [docker login](https://docs.docker.com/engine/reference/commandline/login/).
+* Added variables to Gitpod DOCKER_USERNAME and DOCKER_PASSWORD using ```gp env```.
+* Added command to perform Docker login on workspace startup.
+* Restarted Gitpod environment and tested.
 
 ## Publications
 

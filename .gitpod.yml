@@ -22,6 +22,9 @@ tasks:
       cd $THEIA_WORKSPACE_ROOT/frontend-react-js
       npm i      
       cd $THEIA_WORKSPACE_ROOT
+  
+  - name: Docker Login
+    command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 # Add VSCode Extensions
 vscode:
