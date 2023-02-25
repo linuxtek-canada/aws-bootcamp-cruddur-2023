@@ -1,0 +1,14 @@
+# Updated Node version
+FROM node:18.14.2-alpine3.17 as build
+COPY . /frontend-react-js
+WORKDIR /frontend-react-js
+RUN npm install
+
+FROM node:18.14.2-alpine3.17
+WORKDIR /frontend-react-js
+ENV PORT=3000
+ENV PATH="$PATH:/usr/local/bin"
+RUN apk --no-cache add curl
+COPY --from=build .  .
+EXPOSE ${PORT}
+CMD ["npm", "start"]

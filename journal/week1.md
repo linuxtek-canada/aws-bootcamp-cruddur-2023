@@ -109,6 +109,68 @@ Noticed a ```docker/dynamodb/shared-local-instance.db``` file getting created wh
 
 Rewatched the video for DynamoDB/Postgres and Andrew had done this as well (I found out afterwards).
 
+### Rebuilt Docker containers using multi-stage to reduce size.
+
+Ran a ```docker compose build``` to do a build of the completed code.  Checking ```docker image ls```, we can see the sizes here:
+
+```
+REPOSITORY                                    TAG         IMAGE ID       CREATED              SIZE
+aws-bootcamp-cruddur-2023-backend-flask       latest      f0cd21ad8c9e   5 seconds ago        129MB
+aws-bootcamp-cruddur-2023-frontend-react-js   latest      cd4f459743fe   11 minutes ago       1.19GB
+postgres                                      13-alpine   55f14697b527   13 days ago          238MB
+amazon/dynamodb-local                         latest      904626f640dc   3 weeks ago          499MB
+```
+
+Ran a ```docker image prune -a``` to clear all stored images and start fresh.
+
+* Read through [Docker Docs](https://docs.docker.com/build/building/multi-stage/) on multi-stage builds to understand how they work.
+* Read through [this article](https://mherman.org/blog/dockerizing-a-react-app/) on Dockerizing a React app.
+* Read through [100 Days of Cloud Article](http://100daysofdevops.com/use-multi-stage-builds-with-dockerfile/) on Multi-Stage builds.
+* Added .dockerignore file to speed up build process and not send some files to Docker daemon.
+* Created new Dockerfiles for Frontend and Backend called Dockerfile.prod to use multi-stage called Dockerfile.prod
+* Created new docker-compose-prod file to trigger building multi-stage.
+* Ran ```docker compose -f docker-compose-prod.yml build``` to specify the production Docker Compose Build.
+* Ran ```docker compose -f docker-compose-prod.yml up``` to bring up the containers.
+* Tested to ensure app starts properly and I can access frontend and backend.  Appears to work properly, didn't see any errors on startup.
+
+Checked Multi-Stage image size:
+
+```
+REPOSITORY                                    TAG         IMAGE ID       CREATED          SIZE
+aws-bootcamp-cruddur-2023-backend-flask       latest      5aa1a9e73e3d   4 minutes ago    129MB
+aws-bootcamp-cruddur-2023-frontend-react-js   latest      d6b500db3a84   10 minutes ago   632MB
+postgres                                      13-alpine   55f14697b527   13 days ago      238MB
+amazon/dynamodb-local                         latest      904626f640dc   3 weeks ago      499MB
+```
+
+Appears that only frontend image was significantly reduced in size.
+
+### Implemented Health Checks in Frontend and Backend Dockerfiles
+
+* Read through [Docker Documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/) on Docker Compose v3 healthchecks.
+* Added a healthcheck block into both the normal and production docker-compose files to test the frontend (3000) and backend (4567) ports.
+* Used the API URL to ensure an HTTP 200 as going directly to the backend gets a 404
+* Healthcheck example:
+
+```
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4567/api/activities/home"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+```
+
+* After running a ```docker compose up```, and checking the running containers with ```docker ps```, it now shows a health check as healthy after the start period (30 seconds).
+* Note that I didn't add a health check to the Postgres or DynamoDB containers, as we are only using them for local testing.  
+* Also, had [found](https://stackoverflow.com/questions/70535330/dynamodb-local-web-shell-does-not-load) from helping another student that DynamoDB Local Web Shell was deprecated with version 1.16.X and is not available any longer from 1.17.X to latest.
+* Found that the backend container wouldn't start health check properly.  From researching, found [this comment](https://github.com/caprover/caprover/issues/844#issuecomment-702618580) indicating Alpine doesn't include curl by default.
+* Tried switching to use wget, but had the same problem.  Instead, added a RUN step to both containers to run an apt update and install/update curl.  
+* For my production Alpine build, I added ```RUN apk --no-cache add curl``` instead to install curl.
+* After a rebuild and bringing up the containers, they both show healthy after the start period:
+
+![image](../_docs/assets/week1/HealthCheckSuccess.png
+
 ## Publications
 
 * [AWS Cloud Project Bootcamp – Week 1: Unofficial Homework Guide](https://www.linuxtek.ca/2023/02/18/aws-cloud-project-bootcamp-week-1-unofficial-homework-guide/)
