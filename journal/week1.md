@@ -41,7 +41,7 @@
 
 ## Security Considerations
 * Watched video.  Did not have time for additional activities on security considerations this week.
-* Had seen that npm finds a lot of vulnerabilities, and normally you would want to fix thsees, but upgrading versions of dependencies could break the app.  We had a discussion about this in the Discord.
+* Had seen that npm finds a lot of vulnerabilities, and normally you would want to fix these, but upgrading versions of dependencies could break the app.  We had a discussion about this in the Discord.
 * One action item for later on is to set up AWS Secrets Manager to store the secrets instead of in Gitpod, once we move more out of local development.
 
 ## Stretch Homework
