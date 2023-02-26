@@ -3,6 +3,7 @@ https://docs.honeycomb.io/getting-data-in/opentelemetry/python/
 https://xkcd.com/1597/
 https://honeycomb-whoami.glitch.me
 https://docs.honeycomb.io/getting-data-in/data-best-practices/
+https://github.com/openupthecloud/open-cloud-dev-box
 
 gp env HONEYCOMB_API_KEY="
 
