@@ -6,6 +6,7 @@ class UserActivities:
 
   def run(user_handle):               
     
+    # X-Ray Capture Timestamp and User Handle
     now = datetime.now(timezone.utc).astimezone()
     
     with xray_recorder.in_subsegment('UserData'):
