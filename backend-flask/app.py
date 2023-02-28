@@ -33,9 +33,8 @@ processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
 # AWS X-Ray - Initialize
-xray_url = os.getenv("AWS_XRAY_URL")
+xray_url = os.getenv('AWS_XRAY_URL')
 xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
-XRayMiddleware(app, xray_recorder)
 
 # Honeycomb - Show spans in console standard output
 simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
@@ -46,6 +45,10 @@ tracer = trace.get_tracer(__name__)
 
 # Honeycomb - Initialize automatic instrumentation with Flask
 app = Flask(__name__)
+
+# X-Ray Define Middleware
+XRayMiddleware(app, xray_recorder)
+
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 frontend = os.getenv('FRONTEND_URL')

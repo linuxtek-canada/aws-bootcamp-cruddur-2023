@@ -13,7 +13,7 @@
 * Completed all steps during the livestream to set up Honeycomb distributed tracing.
 * Completed all steps to implement AWS X-Ray
   * Note:  The X-Ray Trace Groups are under **X-Ray > New Console > CloudWatch > Settings > Traces > View Settings > Groups**.
-  
+  * [Github - AWS X-Ray SDK Python](https://github.com/aws/aws-xray-sdk-python)
 
 ## Spending Considerations
 
