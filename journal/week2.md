@@ -29,13 +29,13 @@
 * This uses the following definition to capture the user_handle and timestamp:
 
 ```
-# X-Ray Capture Timestamp and User Handle
 now = datetime.now(timezone.utc).astimezone()
     
 with xray_recorder.in_subsegment('UserData'):
   xray_recorder.current_subsegment().put_metadata('username', user_handle)
   xray_recorder.current_subsegment().put_metadata('timestamp', now.isoformat())
 ```
+
 * By defining it this way, you don't have to use begin_subsegment(), current_subsegment(), end_subsegment() functions.
 * Was able to get this to output to X-Ray as metadata.  For example, going to the ```/api/activities/@andrewbrown``` endpoint would push the following to X-Ray:
 
