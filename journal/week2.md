@@ -4,9 +4,9 @@
 
 ### Video Review
 * Watched [FREE AWS Cloud Project Bootcamp - Update 2023-02-23 Video](https://youtu.be/gQxzMvk6BzM).
-* Watched [Week 2 – Live Streamed Video – Honeycomb.io Setup](https://www.youtube.com/live/2GD9xCzRId4?feature=share).
-* Watched [Week 2 – Instrument X-Ray Video](https://youtu.be/n2DTsuBrD_A).
-* Watched [Week 2 – CloudWatch Logs Video](https://youtu.be/ipdFizZjOF4).
+* Watched [Week 2 - Live Streamed Video – Honeycomb.io Setup](https://www.youtube.com/live/2GD9xCzRId4?feature=share).
+* Watched [Week 2 - Instrument X-Ray Video](https://youtu.be/n2DTsuBrD_A).
+* Watched [Week 2 - CloudWatch Logs Video](https://youtu.be/ipdFizZjOF4).
 * Watched [Week 2 - Rollbar Video](https://youtu.be/xMBDAb5SEU4).
 
 ### Actions
@@ -83,3 +83,7 @@ with xray_recorder.in_subsegment('UserData'):
 * [Video Recording](https://youtu.be/if79J5qJyo8)
 * Webcast went over a number of helpful best practices when setting up Rollbar.
 * Went over implementing Rollbar error handling in Python as well as other languages like Javascript.
+
+## Publications
+
+* [AWS Cloud Project Bootcamp – Week 2: Unofficial Homework Guide](https://www.linuxtek.ca/2023/02/26/aws-cloud-project-bootcamp-week-2-unofficial-homework-guide/)
