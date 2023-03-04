@@ -1,18 +1,24 @@
+import os
 from datetime import datetime, timedelta, timezone
 from aws_xray_sdk.core import xray_recorder
-import os
 
 class UserActivities:
 
-  def run(user_handle):               
+  def __init__(self, request):
+    #self.xray_recorder = xray_recorder
+    self.request = request
+
+  def run(self, user_handle):               
     
     # X-Ray Capture Timestamp and User Handle
     now = datetime.now(timezone.utc).astimezone()
     
-    with xray_recorder.in_subsegment('UserData'):
-      xray_recorder.current_subsegment().put_metadata('username', user_handle)
-      xray_recorder.current_subsegment().put_metadata('timestamp', now.isoformat())
-          
+    with xray_recorder.in_subsegment('user_activities'):
+      xray_recorder.current_subsegment().put_metadata('username', user_handle,'userdata')
+      xray_recorder.current_subsegment().put_metadata('timestamp', now.isoformat(),'userdata')
+      xray_recorder.current_subsegment().put_metadata('method',self.request.method, 'http')
+      xray_recorder.current_subsegment().put_metadata('url', self.request.url, 'http')
+
     model = {
       'errors': None,
       'data': None
