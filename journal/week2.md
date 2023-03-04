@@ -6,20 +6,28 @@
 * Watched [FREE AWS Cloud Project Bootcamp - Update 2023-02-23 Video](https://youtu.be/gQxzMvk6BzM).
 * Watched [Week 2 - Live Streamed Video – Honeycomb.io Setup](https://www.youtube.com/live/2GD9xCzRId4?feature=share).
 * Watched [Week 2 - Instrument X-Ray Video](https://youtu.be/n2DTsuBrD_A).
+* Watched [Week 2 – X-Ray Subsegments Solved Video](https://youtu.be/4SGTW0Db5y0)
 * Watched [Week 2 - CloudWatch Logs Video](https://youtu.be/ipdFizZjOF4).
 * Watched [Week 2 - Rollbar Video](https://youtu.be/xMBDAb5SEU4).
+* Watched [Week 2 – Github Codespaces Crash Course Video](https://youtu.be/L9KKBXgKopA).
 
 ### Actions
 
 #### Honeycomb
 
 * Completed all steps during the livestream to set up Honeycomb distributed tracing.
+* Confirmed trace data is showing up in Web UI:
+
+![image](../_docs/assets/week2/HoneycombTraceData.png)
 
 #### AWS X-Ray
 
 * Completed all steps to implement AWS X-Ray tracing
 * Note:  The X-Ray Trace Groups are under **X-Ray > New Console > CloudWatch > Settings > Traces > View Settings > Groups**.
 * [Github - AWS X-Ray SDK Python](https://github.com/aws/aws-xray-sdk-python)
+* Able to get X-Ray Traces showing up in CloudWatch > X-Ray Traces > Traces
+
+![image](../_docs/assets/week2/X-Ray-Traces.png)
 
 #### AWS CloudWatch
 
@@ -27,6 +35,9 @@
 * Used [Watchtower](https://pypi.org/project/watchtower/) as a log handler for AWS CloudWatch.
 * Used [Logging](https://docs.python.org/3/library/logging.html) to manage generating the logs.
 * Left all logging for CloudWatch and X-Ray enabled in code as I'm not concerned about a slight amount of spend from log generation, if there is any.
+* Confirmed log streams are able to be displayed in CloudWatch:
+
+![image](../_docs/assets/week2/CloudWatchLogGroup.png)
 
 #### Rollbar
 
@@ -37,8 +48,12 @@
 ![image](../_docs/assets/week2/RollbarHelloWorld.png)
 
 ## Spending Considerations
+* Watched [Week 2 - Spend Considerations Video](https://www.youtube.com/watch?v=2W3KeqCjtDY).
+* Completed Spend Quiz.
 
 ## Security Considerations
+* Watched [Week 2 - Security Considerations Video](https://youtu.be/bOf4ITxAcXc).
+* Completed Security Quiz.
 
 ## Stretch Homework
 
@@ -77,6 +92,11 @@ with xray_recorder.in_subsegment('UserData'):
 * From discussions in Discord, based on [this documentation](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python.html), it explains that when using Django or Flask, adding the SDK middleware creates a segment for each traced request, and completes the segment when the response is sent. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls. 
 
 * This explains why I was only able to create a subsegment, and was constantly getting SegmentNotFoundException errors when attempting to create a segment while one was already defined via the middleware.
+
+### Improved AWS X-Ray Tracing Data
+
+Went through the [article](https://olley.hashnode.dev/aws-free-cloud-bootcamp-instrumenting-aws-x-ray-subsegments) Olley wrote describing the issues with X-Ray segments/subsegments, and the [video](https://youtu.be/4SGTW0Db5y0) Andrew published on it.
+
 
 ### Attended Rollbar Project Configuration Best Practices Webinar
 
