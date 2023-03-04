@@ -7,6 +7,15 @@ services:
     environment:
       FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
       BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      OTEL_SERVICE_NAME: 'backend-flask'
+      OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
+      OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"      
+      AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
+      AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+      AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
     build: ./backend-flask
     image: ${DOCKER_USERNAME}/cruddur-backend-dev:latest
     ports:
@@ -23,7 +32,7 @@ services:
   frontend-react-js:
     container_name: cruddur-frontend
     environment:
-      REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"      
     build: ./frontend-react-js
     image: ${DOCKER_USERNAME}/cruddur-frontend-dev:latest
     ports:
@@ -60,6 +69,19 @@ services:
       - '5432:5432'
     volumes: 
       - db:/var/lib/postgresql/data
+
+# AWS X-Ray Daemon Container
+# https://hub.docker.com/r/amazon/aws-xray-daemon
+  xray-daemon:
+      image: "amazon/aws-xray-daemon"
+      environment:
+        AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+        AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+        AWS_REGION: ${AWS_DEFAULT_REGION}
+      command:
+        - xray -o -b "xray-daemon:2000"
+      ports:
+        - 2000:2000/udp
 
 # the name flag is a hack to change the default prepend folder
 # name when outputting the image names

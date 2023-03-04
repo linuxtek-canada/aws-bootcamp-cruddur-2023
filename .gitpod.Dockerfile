@@ -10,7 +10,8 @@ RUN cd /workspace \
 RUN sudo apt update \
     && sudo apt install -y apt-utils --no-install-recommends apt-utils \
     && sudo apt autoremove -y \   
-    && npm install -g npm@latest
+    && npm install -g npm@latest \
+    && pip install --upgrade pip
 
 # Install PostgreSQL Client into Gitpod
 RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg \

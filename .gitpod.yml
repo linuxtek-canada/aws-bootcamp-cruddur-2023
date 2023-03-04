@@ -36,3 +36,18 @@ vscode:
     - redhat.ansible
     - redhat.vscode-yaml
     - amazonwebservices.aws-toolkit-vscode
+
+# Unlock Gitpod Ports
+ports:
+  - name: frontend
+    port: 3000
+    onOpen: ignore
+    visibility: public
+  - name: backend
+    port: 4567
+    onOpen: ignore
+    visibility: public
+  - name: xray-daemon
+    port: 2000
+    onOpen: ignore
+    visibility: public
