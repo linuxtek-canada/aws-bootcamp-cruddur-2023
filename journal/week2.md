@@ -25,7 +25,7 @@
 * Completed all steps to implement AWS X-Ray tracing
 * Note:  The X-Ray Trace Groups are under **X-Ray > New Console > CloudWatch > Settings > Traces > View Settings > Groups**.
 * [Github - AWS X-Ray SDK Python](https://github.com/aws/aws-xray-sdk-python)
-* Able to get X-Ray Traces showing up in CloudWatch > X-Ray Traces > Traces
+* Able to get X-Ray Traces showing up in **CloudWatch > X-Ray Traces > Traces**:
 
 ![image](../_docs/assets/week2/X-Ray-Traces.png)
 
@@ -98,7 +98,7 @@ with xray_recorder.in_subsegment('UserData'):
 * Went through the [article](https://olley.hashnode.dev/aws-free-cloud-bootcamp-instrumenting-aws-x-ray-subsegments) Olley wrote describing the issues with X-Ray segments/subsegments, and the [video](https://youtu.be/4SGTW0Db5y0) Andrew published on it.
 
 * I had previously adapted my implementation of X-Ray in a different way so I didn't have to explicitly begin and end the subsegment, so I could not use the exact same method Olley did.
-
+* Modified segment/subsegment names to match function name user_activities.
 * Adjusted app.py code for X-Ray to capture the user_activities data, so I could pull the http url and method.
 * Adjusted user_activities.py code to use "user_activities" as the subsegment, and added in the additional metadata.
 * Renamed the metadata groups so they are grouped better:
