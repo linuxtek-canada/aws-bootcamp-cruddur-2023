@@ -35,6 +35,7 @@ RUN yes | unminimize \
         ssh \
         sudo \
         unzip \
+        wget \
         vim \     
     && locale-gen en_US.UTF-8 \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*

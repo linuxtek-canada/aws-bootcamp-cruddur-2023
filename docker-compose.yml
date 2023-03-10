@@ -7,8 +7,8 @@ services:
     environment:
       # FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
       # BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
-      FRONTEND_URL: "https://localhost:3000"
-      BACKEND_URL: "https://localhost:4567"
+      FRONTEND_URL: "http://localhost:3000"
+      BACKEND_URL: "http://localhost:4567"
 
       OTEL_SERVICE_NAME: 'backend-flask'
       OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
@@ -37,7 +37,7 @@ services:
     container_name: cruddur-frontend
     environment:
       # REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"      
-      REACT_APP_BACKEND_URL: "https://localhost:4567"
+      REACT_APP_BACKEND_URL: "http://localhost:4567"
       REACT_APP_AWS_PROJECT_REGION: "${AWS_DEFAULT_REGION}"      
       REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
       REACT_APP_AWS_USER_POOL_ID: "ca-central-1_ixkntZehR"
