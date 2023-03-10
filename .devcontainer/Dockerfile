@@ -4,33 +4,49 @@ FROM ubuntu:jammy-20230301
 # https://hub.docker.com/r/gitpod/workspace-full/dockerfile
 # Skipping some of the build tools for languages we aren't using
 
+RUN ["/bin/bash", "-c", "echo I am now using bash!"]
+
 RUN yes | unminimize \
-    && apt update \
+    && apt update \    
     && apt install -yq \
         apt-utils --no-install-recommends apt-utils \
-        asciidoctor \
+        asciidoctor \        
         bash-completion \
         build-essential \
+        ca-certificates \
+        curl \
         git \
         git-lfs \
+        gnupg \
         htop \
         jq \
         less \
         llvm \
         locales \
+        lsb-release \
         man-db \
+        net-tools \        
         nano \
-        software-properties-common \
-        sudo \
-        vim \
         nodejs \
         npm \
-        sudo \
         python3 \        
         python3-pip \    
+        software-properties-common \
+        sudo \
+        unzip \
+        vim \     
     && locale-gen en_US.UTF-8 \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 ENV LANG=en_US.UTF-8
+
+# Install Docker inside Container
+RUN sudo mkdir -m 0755 -p /etc/apt/keyrings \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+    && echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+  && apt update \
+  && apt install -yq docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Set up user bootcamp
 ARG USERNAME=bootcamp
@@ -46,17 +62,19 @@ USER $USERNAME
 RUN cd /tmp \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
-    && sudo ./aws/install
+    && sudo ./aws/install \
+    && rm awscliv2.zip \
+    && rm -rf /tmp/aws
 
-# Install PostgreSQL Client into Gitpod
+# Install PostgreSQL Client
 RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg \
     && echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee -a /etc/apt/sources.list.d/pgdg.list \
     && sudo apt update \
     && sudo apt install -y postgresql-client-13 libpq-dev
 
 # Refresh OS and packages
-RUN sudo apt update \    
-    && sudo apt autoremove -y \   
-    && npm install -g npm@latest \
-    && pip install --upgrade pip
+RUN sudo apt update \
+    && sudo apt upgrade -yq \
+    && sudo apt autoremove -y
 
+ENV SHELL /bin/bash
