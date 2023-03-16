@@ -15,6 +15,8 @@ from services.messages import *
 from services.create_message import *
 from services.show_activity import *
 
+from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
+
 # Honeycomb - Imports
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
@@ -57,6 +59,12 @@ tracer = trace.get_tracer(__name__)
 
 # Honeycomb - Initialize automatic instrumentation with Flask
 app = Flask(__name__)
+
+cognito_jwt_token = CognitoJwtToken(
+  user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
+  user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"),
+  region=os.getenv("AWS_DEFAULT_REGION")
+)
 
 # X-Ray Define Middleware
 XRayMiddleware(app, xray_recorder)
@@ -151,7 +159,21 @@ def data_home():
   
   app.logger.info('AUTH HEADER:')
   app.logger.info(request.headers.get('Authorization'))  
-  data = HomeActivities.run(logger=LOGGER)  
+  
+  access_token = extract_access_token(request.headers)
+  try:
+    claims = cognito_jwt_token.verify(access_token)
+    # Authenticated Request
+    app.logger.debug("authenicated")
+    app.logger.debug(claims)
+    app.logger.debug(claims['username'])
+    data = HomeActivities.run(cognito_user_id=claims['username'])
+  except TokenVerifyError as e:
+    # Unauthenticated Request
+    app.logger.debug(e)
+    app.logger.debug("unauthenicated")
+    data = HomeActivities.run()
+  
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])

@@ -6,7 +6,9 @@
 
 * Watched: [Week 3 – Live Streamed Video – Decentralized Authentication](https://www.youtube.com/live/9obl7rVgzJw)
 * Watched: [Week 3 - Cognito Custom Pages](https://youtu.be/T4X4yIzejTc)
+* Watched: [Week 3 - Cognito – JWT Server Side Verify](https://youtu.be/d079jccoG-M)
 * Watched: [Week 3 - Exploring JWTs](https://youtu.be/nJjbI4BbasU)
+* Watched: [Week 3 - Improving UI Contrast and Implementing CSS Variables for Theming](https://youtu.be/m9V4SmJWoJU)
 
 ### Actions
 
@@ -73,10 +75,19 @@ aws cognito-idp admin-set-user-password \
 
 [How I'm feeling after all that](https://www.youtube.com/watch?v=BbgyppGqBgg)
 
+* Followed through rest of video and reviewed commit history to pull in the required code, make adjustments to get auth working.
+* Rebuild and brought up containers and confirmed auth is working and I'm able to log in and out.
 
 #### Exploring JWTs
 
 * Watched video on exploring JWTs
+
+#### Improving UI Contrast and Implementing CSS Variables For Themeing
+
+* Watched video on Improving UI Contrast and Implementing CSS Variables for Theming.
+* Followed along and made adjustments to UI code.
+
+![image](../_docs/assets/week3/CruddurUIRefresh.png)
 
 ## Stretch Homework
 
