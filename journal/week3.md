@@ -54,6 +54,26 @@ aws cognito-idp admin-set-user-password \
 * Updated RecoveryPage.js with modified code.
 * Adjusted setErrors to remove Cognito references.
 
+#### Cognito - JWT Server Side Verify
+
+* Watched video on setting up server side JWT Verify
+* Added CORS code change in app.py to allow Authorization header
+* Set INFO logging for the header and confirmed it works:
+
+![image](../_docs/assets/week3/AuthorizationHeader.png)
+
+* Added Flask-AWSCognito to requirements.txt and rebuilt
+* Repo:  https://github.com/cgauge/Flask-AWSCognito
+* Went through the same steps to get this working until we hit the limitation on requiring a secret
+* Removed all of the references to the Flask-AWSCognito library (wish we knew this and could have saved time)
+* Started new code at 24:45 in video.  Right at the end of the video Andrew shows where to get the code for the auth...
+* "...you could just copy and paste it out of there, and save yourself a lot of trouble."
+
+<img src="../_docs/assets/week3/doublefacepalm.jpg" height="300">
+
+[How I'm feeling after all that](https://www.youtube.com/watch?v=BbgyppGqBgg)
+
+
 #### Exploring JWTs
 
 * Watched video on exploring JWTs
