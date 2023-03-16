@@ -4,12 +4,12 @@
 
 ### Video Review
 
-* Watched: [Week 3 – Live Streamed Video – Decentralized Authentication](https://www.youtube.com/live/9obl7rVgzJw)
+* Watched: [Week 3 - Live Streamed Video – Decentralized Authentication](https://www.youtube.com/live/9obl7rVgzJw)
 * Watched: [Week 3 - Cognito Custom Pages](https://youtu.be/T4X4yIzejTc)
 * Watched: [Week 3 - Cognito – JWT Server Side Verify](https://youtu.be/d079jccoG-M)
 * Watched: [Week 3 - Exploring JWTs](https://youtu.be/nJjbI4BbasU)
 * Watched: [Week 3 - Improving UI Contrast and Implementing CSS Variables for Theming](https://youtu.be/m9V4SmJWoJU)
-
+* Watched: [Week 3 - Security Considerations - Decentralized Authentication](https://youtu.be/tEJIeII66pY)
 ### Actions
 
 #### Live Stream Video Tasks - Set up Cognito User Pool
@@ -88,6 +88,14 @@ aws cognito-idp admin-set-user-password \
 * Followed along and made adjustments to UI code.
 
 ![image](../_docs/assets/week3/CruddurUIRefresh.png)
+
+### Spend Considerations
+
+* No video or quiz this week due to instructor illness.
+
+### Security Considerations
+* Watched: [Week 3 - Security Considerations - Decentralized Authentication](https://youtu.be/tEJIeII66pY)
+* Completed security quiz.
 
 ## Stretch Homework
 
