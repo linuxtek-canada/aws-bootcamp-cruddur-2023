@@ -1,0 +1,16 @@
+https://github.com/omenking/aws-bootcamp-cruddur-2023/blob/week-3/journal/week3.md
+
+Cognito > User Pool > 
+
+Frontend Code from Amplify JS:  https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/
+
+npm install aws-amplify --save
+
+Amplify UI: https://ui.docs.amplify.aws/
+
+
+REACT_AWS_PROJECT_REGION:
+REACT_APP_AWS_COGNITO_IDENTITY_POOL_ID:
+REACT_APP_AWS_COGNITO_REGION:
+REACT_APP_AWS_USER_POOLS_ID:
+REACT_APP_CLIENT_ID:
