@@ -55,7 +55,9 @@
     "DOCKER_USERNAME":        "${localEnv:DOCKER_USERNAME}",
     "DOCKER_PASSWORD":        "${localEnv:DOCKER_PASSWORD}",
     "HONEYCOMB_API_KEY":      "${localEnv:HONEYCOMB_API_KEY}",
-    "ROLLBAR_ACCESS_TOKEN":   "${localEnv:ROLLBAR_ACCESS_TOKEN}"
+    "ROLLBAR_ACCESS_TOKEN":   "${localEnv:ROLLBAR_ACCESS_TOKEN}",
+    "CONNECTION_URL":         "${localEnv:CONNECTION_URL}",
+    "PROD_CONNECTION_URL":    "${localEnv:PROD_CONNECTION_URL}"
   },
   
   "remoteUser": "bootcamp",
