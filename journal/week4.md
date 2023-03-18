@@ -134,4 +134,13 @@ aws ec2 modify-security-group-rules \
 
 * Watched [Week 4 - Creating Activities](https://youtu.be/fTksxEQExL4) Video.
 
-* Went through 
+* Went through repos and watched part of video.  Set up activities, SQL, etc.
+* Had problem with NotNullViolation activities.
+* Troubleshooting making changes to understand why a null UUID error was occurring.
+* Found solution in Discord [here](https://discord.com/channels/1055552619441049660/1086233246691495968/1086233246691495968)
+* Made adjustments to frontend to ensure user_handle is passed properly
+* Saved and now able to post new activities:
+
+![image](../_docs/assets/week4/DiscordSolutionNotNullViolation.png)
+
+![image](../_docs/assets/week4/CrudActivityAddSuccess.png)
