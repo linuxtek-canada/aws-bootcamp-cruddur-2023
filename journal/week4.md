@@ -4,9 +4,11 @@
 
 ### Video Review
 
-* Watched [Week 4 – Live Streamed Video – Relational Databases](https://www.youtube.com/live/EtD7Kv5YCUs) Video.
+* Watched [Week 4 - Live Streamed Video - Relational Databases](https://www.youtube.com/live/EtD7Kv5YCUs) Video.
 * Watched [Week 4 - SQL RDS](https://youtu.be/Sa2iB33sKFo) Video.
+* Watched [Week 4 - Cognito Post Confirmation Lambda](https://youtu.be/7qP4RcY2MwU) Video.
 * Watched [Week 4 - Creating Activities](https://youtu.be/fTksxEQExL4) Video.
+* Watched [Week 4 - Security Considerations - Securing Your Amazon RDS Postgres Database](https://youtu.be/UourWxz7iQg) Video.
 
 ### Actions
 
@@ -144,3 +146,28 @@ aws ec2 modify-security-group-rules \
 ![image](../_docs/assets/week4/DiscordSolutionNotNullViolation.png)
 
 ![image](../_docs/assets/week4/CrudActivityAddSuccess.png)
+
+### Spend Considerations
+
+* No video or quiz this week
+
+### Security Considerations
+
+* Watched [Week 4 - Security Considerations - Securing Your Amazon RDS Postgres Database](https://youtu.be/UourWxz7iQg) Video.
+
+* Completed security quiz.
+
+## Stretch Homework
+
+* Refreshed DevContainer configuration to include Week 4 required environment variables.
+* Ensured we didn't have to hardcode CONNECTION_URL and PROD_CONNECTION_URL.
+* Found a way to avoid the curl command noise by using -s silent flag.
+* Added epoch timestamp to aws command to refresh allowed IP, to show it is refreshing.
+* Auto upgraded npm to newer version due to build warnings.
+* Added multiple postAttachCommands to install npm and pip on launch
+* Because my RDS username is cruddurroot, the regex used to remove the DB name was replacing the username, and messing up my pqsl connection string.  Fixed the regex to be simpler and only do a replace/remove on the database name.
+
+
+## Publications
+
+* [AWS Cloud Project Bootcamp – Week 4: Unofficial Homework Guide](https://www.linuxtek.ca/2023/03/14/aws-cloud-project-bootcamp-week-4-unofficial-homework-guide/)

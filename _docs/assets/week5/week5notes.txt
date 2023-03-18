@@ -6,6 +6,7 @@ DynamoDB Data Modelling:  https://docs.google.com/spreadsheets/d/1LrTC_y2X_YBEth
 
 ExamPro - DynamoDB - Introduction:  https://youtu.be/Ih8Bxtt5Ekw
 
+DynamoDB Diagram as SVG (downloaded DynamoDB_Modelling.svg)
 
 Can write SQL for DynamoDB:  PartiQL - subset
 
