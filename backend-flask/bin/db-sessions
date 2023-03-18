@@ -15,7 +15,7 @@ else
 fi
 
 NO_DB_CONNECTION_URL=$(sed 's/\/cruddur//g' <<<"$CON_URL")
-psql $NO_DB_CON_URL -c "select pid as process_id, \
+psql $NO_DB_CONNECTION_URL -c "select pid as process_id, \
        usename as user,  \
        datname as db, \
        client_addr, \
