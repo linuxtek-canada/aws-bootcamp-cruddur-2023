@@ -1,6 +1,0 @@
-Defaulting to user installation because normal site-packages is not writeable
-Requirement already satisfied: python-jose in /home/bootcamp/.local/lib/python3.10/site-packages (3.3.0)
-Requirement already satisfied: rsa in /home/bootcamp/.local/lib/python3.10/site-packages (from python-jose) (4.9)
-Requirement already satisfied: ecdsa!=0.15 in /home/bootcamp/.local/lib/python3.10/site-packages (from python-jose) (0.18.0)
-Requirement already satisfied: pyasn1 in /home/bootcamp/.local/lib/python3.10/site-packages (from python-jose) (0.4.8)
-Requirement already satisfied: six>=1.9.0 in /usr/lib/python3/dist-packages (from ecdsa!=0.15->python-jose) (1.16.0)
