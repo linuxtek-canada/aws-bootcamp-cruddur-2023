@@ -90,5 +90,23 @@ psql $PROD_CONNECTION_URL
 * Added psycopg requirements
 * [Psycopg 3 Documentation](https://www.psycopg.org/psycopg3/)
 
+* Added local IP to RDS security group
 
+* Added environment variables for storing AWS security group rule and ID to local machine and parameters to pass into Dev Container
 
+```
+export LOCAL_IP=$(curl -s ifconfig.me)
+export DB_SG_ID="<DB Security Group ID>"
+export DB_SG_RULE_ID="<DB Security Group Rule ID>"
+```
+
+* Could add these in for Gitpod and would just have to adjust the AWS CLI command to pull the GITPOD_IP env variable instead.
+
+* Command to update the security groups:
+
+```
+aws ec2 modify-security-group-rules \
+    --group-id $DB_SG_ID \
+    --security-group-rules "SecurityGroupRuleId=$DB_SG_RULE_ID,SecurityGroupRule=
+    {Description='Allow Workstation PSQL',IpProtocol=tcp,FromPort=5432,ToPort=5432,CidrIpv4=$LOCAL_IP/32}"
+```

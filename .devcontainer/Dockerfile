@@ -21,6 +21,7 @@ RUN yes | unminimize \
         git-lfs \
         gnupg \
         htop \
+        iputils-ping \
         jq \
         less \
         llvm \
