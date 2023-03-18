@@ -15,7 +15,7 @@ if [ "$1" = "prod" ]; then
     CON_URL=$PROD_CONNECTION_URL
 else
     echo "Using Dev"
-    CON_URL=$CONNECTION_URL
+    CON_URL=$PROD_CONNECTION_URL
 fi
 
 psql $CON_URL cruddur < $schema_path

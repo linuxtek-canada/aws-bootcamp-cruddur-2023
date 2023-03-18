@@ -1,0 +1,13 @@
+Week 5 Notes:  https://github.com/omenking/aws-bootcamp-cruddur-2023/blob/week-5/journal/week5.md
+
+Lucid Chart Document:  https://lucid.app/lucidchart/8f58a19d-3821-4529-920f-5bb802d6c6a3/edit?viewport_loc=2163%2C508%2C2219%2C1161%2C0_0&invitationId=inv_e47bc316-9caa-4aee-940f-161e01e22715
+
+DynamoDB Data Modelling:  https://docs.google.com/spreadsheets/d/1LrTC_y2X_YBEthFNlnwbo8TgxGlpHV3TCpM6XeVyiGg/edit#gid=0
+
+ExamPro - DynamoDB - Introduction:  https://youtu.be/Ih8Bxtt5Ekw
+
+
+Can write SQL for DynamoDB:  PartiQL - subset
+
+Local Secondary Index (LSI)
+Global Secondary Index (GSI)

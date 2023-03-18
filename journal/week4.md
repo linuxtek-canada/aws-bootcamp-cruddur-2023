@@ -132,3 +132,6 @@ aws ec2 modify-security-group-rules \
 
 #### Creating Activities
 
+* Watched [Week 4 - Creating Activities](https://youtu.be/fTksxEQExL4) Video.
+
+* Went through 
