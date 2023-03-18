@@ -81,10 +81,14 @@ export PROD_CONNECTION_URL="postgresql://cruddurroot:<password>@aws-rds-endpoint
 psql $PROD_CONNECTION_URL
 ```
 
-* Set CONNECTION_STRING and PROD_CONNECTION_STRING environment variables for Dev Containers and Gitpod
+* Set CONNECTION_URL and PROD_CONNECTION_URL environment variables for Dev Containers and Gitpod
 
 * Created bash scripts for creating and dropping the database, and loading the schema.
 * Created bash script for loading seed data and tested loading.
+* Created bash scripts for automating setup
+
+* Added psycopg requirements
+* [Psycopg 3 Documentation](https://www.psycopg.org/psycopg3/)
 
 
 
