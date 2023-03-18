@@ -4,7 +4,9 @@
 
 ### Video Review
 
-* Watched [Week 4 – Live Streamed Video – Relational Databases](https://www.youtube.com/live/EtD7Kv5YCUs)
+* Watched [Week 4 – Live Streamed Video – Relational Databases](https://www.youtube.com/live/EtD7Kv5YCUs) Video.
+* Watched [Week 4 - SQL RDS](https://youtu.be/Sa2iB33sKFo) Video.
+* Watched [Week 4 - Creating Activities](https://youtu.be/fTksxEQExL4) Video.
 
 ### Actions
 
@@ -63,6 +65,10 @@ UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition; -
 DELETE FROM table_name WHERE condition; -- Delete data from a table
 ```
 
+#### SQL RDS
+
+* Watched [Week 4 - SQL RDS](https://youtu.be/Sa2iB33sKFo) Video
+
 * Imported schema using the following while in the backend-flask directory:
 
 ```
@@ -110,3 +116,19 @@ aws ec2 modify-security-group-rules \
     --security-group-rules "SecurityGroupRuleId=$DB_SG_RULE_ID,SecurityGroupRule=
     {Description='Allow Workstation PSQL',IpProtocol=tcp,FromPort=5432,ToPort=5432,CidrIpv4=$LOCAL_IP/32}"
 ```
+
+#### Cognito Post Confirmation Lambda
+
+* Build Lambda function using ClickOps
+* Imported corrected code into aws/lambda directory
+* Configured Cognito Post-Confirmation Trigger
+* Refreshed db bash scripts
+* Pushed schema to production database
+* Was able to delete and recreate user and have it successfully insert into database without error:
+
+![image](../_docs/assets/week4/LambdaLogSuccess.png)
+
+![image](../_docs/assets/week4/PSQLDataSuccess.png)
+
+#### Creating Activities
+
