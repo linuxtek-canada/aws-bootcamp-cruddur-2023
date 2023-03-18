@@ -159,14 +159,15 @@ aws ec2 modify-security-group-rules \
 
 ## Stretch Homework
 
-* Refreshed DevContainer configuration to include Week 4 required environment variables.
+* Refreshed DevContainer configuration to include Week 4 required environment variables.  
+* Used $LOCAL_IP instead of $GITPOD_IP, added a curl command to refresh on DevContainer launch and run the security group allowed IP.
 * Ensured we didn't have to hardcode CONNECTION_URL and PROD_CONNECTION_URL.
 * Found a way to avoid the curl command noise by using -s silent flag.
-* Added epoch timestamp to aws command to refresh allowed IP, to show it is refreshing.
-* Auto upgraded npm to newer version due to build warnings.
-* Added multiple postAttachCommands to install npm and pip on launch
-* Because my RDS username is cruddurroot, the regex used to remove the DB name was replacing the username, and messing up my pqsl connection string.  Fixed the regex to be simpler and only do a replace/remove on the database name.
-
+* Added epoch timestamp to aws command description to refresh allowed IP, to show it is refreshing.
+* Auto upgraded npm on DevContainer startup to newer version due to build warnings.
+* Adjusted postAttachCommands to allow for multiple concurrent commands to run, so npm and pip install should run faster.
+* Because my RDS username is cruddurroot, the regex used to remove the DB name was replacing the username, and messing up my pqsl connection string.  
+* Fixed the regex to be simpler and only do a replace/remove on the database name.
 
 ## Publications
 
