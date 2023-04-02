@@ -57,6 +57,7 @@ class Db:
           return returning_id
     except Exception as err:
       self.print_sql_err(err)
+      
   # when we want to return a a single value
   def query_value(self,sql,params={}):
     self.print_sql('value',sql,params)
