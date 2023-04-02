@@ -12,3 +12,9 @@ Can write SQL for DynamoDB:  PartiQL - subset
 
 Local Secondary Index (LSI)
 Global Secondary Index (GSI)
+
+Primer Content:
+https://www.youtube.com/watch?v=Mw8wCj0gkRc&list=PLJo-rJlep0EDNtcDeHDMqsXJcuKMcrC5F
+There are 6 videos about the core concepts of DynamoDB
+
+Alex Debrie: https://www.alexdebrie.com/
