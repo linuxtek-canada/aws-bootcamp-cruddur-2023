@@ -37,5 +37,10 @@
 * Added app.route short to App.js and added users_short.py
 * Updated MessageGroupFeed.js
 
+### Security Considerations
 
+* Watched [Week 5 - Security Considerations - DynamoDB Considerations](https://youtu.be/zGnzM_YdMJU)
+* Completed Security Quiz
 
+## Publications
+* [AWS Cloud Project Bootcamp – Week 4: Unofficial Homework Guide](https://www.linuxtek.ca/2023/03/19/aws-cloud-project-bootcamp-week-5-unofficial-homework-guide/)
